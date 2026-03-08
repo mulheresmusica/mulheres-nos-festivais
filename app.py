@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from datetime import datetime, timezone
 import numpy as np
 
-st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="⚫", layout="wide")
 
 st.markdown("""
     <style>
