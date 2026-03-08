@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from datetime import datetime, timezone
 import numpy as np
 
-st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="⚫", layout="wide")
+st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
 st.markdown("""
     <style>
@@ -34,7 +34,7 @@ st.markdown("""
         }
         
         /* Resto do CSS permanece igual... */
-        #MainMenu {visibility: hidden;}
+        
         footer {visibility: hidden;}
         
         [data-testid="stSidebar"] > div:first-child {padding-top: 1.5rem;}
