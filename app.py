@@ -9,8 +9,6 @@ st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_i
 
 st.markdown("""
     <style>
-        /* Esconde o menu de hambúrguer (canto superior direito) */
-        #MainMenu {visibility: hidden;}
         
         /* Esconde o rodapé "Made with Streamlit" */
         footer {visibility: hidden;}
