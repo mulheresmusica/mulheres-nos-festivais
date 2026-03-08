@@ -7,16 +7,32 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="📊", layout="wide")
 
+# --- AJUSTE FINO: ESCONDER LOGOS MAS MANTER O MENU LATERAL ---
 st.markdown("""
     <style>
+        /* 1. Esconde o menu de opções do Streamlit (os 3 pontinhos) */
+        #MainMenu {visibility: hidden;}
         
-        /* Esconde o rodapé "Made with Streamlit" */
+        /* 2. Esconde o rodapé 'Made with Streamlit' */
         footer {visibility: hidden;}
         
-        /* Esconde o ícone do GitHub e outros botões do topo */
-        header {visibility: hidden;}
+        /* 3. Remove especificamente o link do GitHub e decorações do header, 
+              mas deixa o botão do Sidebar visível */
+        header {
+            background-color: rgba(0,0,0,0);
+        }
         
-        /* Ajusta o espaçamento do topo que sobra após esconder o header */
+        /* Esconde os botões da direita (GitHub, deploy, etc) */
+        .stAppDeployButton, .st-emotion-cache-zq5wmm {
+            display: none !important;
+        }
+
+        /* Garante que o botão do menu lateral (as setas) continue visível e clicável */
+        .st-emotion-cache-16idsys, .st-emotion-cache-1avcm0n {
+            visibility: visible !important;
+        }
+
+        /* Ajusta o topo para o conteúdo não ficar colado lá em cima */
         .main .block-container {
             padding-top: 2rem;
         }
