@@ -9,27 +9,24 @@ st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_i
 
 st.markdown("""
     <style>
-        /* Corrigir corte no topo e alinhar com sidebar */
         .block-container {
-            padding-top: 6.5rem !important;  /* Igual ao padding do sidebar */
+            padding-top: 6.5rem !important;  
             padding-bottom: 2rem;
         }
         
-        /* Ajustar título da seção para não ter margin extra */
         .section-title {
             font-size: 1.3rem;
             font-weight: 600;
             color: #1a1a1a;
-            margin-top: 0 !important;  /* Remover margin-top para alinhar com início do container */
+            margin-top: 0 !important;  
             margin-bottom: 0.2rem;
             border-bottom: 2px solid #444;
             padding-bottom: 0.4rem;
             display: inline-block;
         }
         
-        /* Header compacto para não empurrar conteúdo demais */
         header[data-testid="stHeader"] {
-            height: 2rem;  /* Reduzido para mínimo necessário */
+            height: 2rem;  
             background: transparent;
         }
         
@@ -59,6 +56,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# --- LEI DE CORES PADRONIZADA ---
+CORES_GEN = {
+    'Homens': '#0077B6',      # Azul Vibrante
+    'Mulheres': '#7B2CBF',    # Roxo Vibrante
+    'Não-binários': '#FF8500', # Laranja Brilhante
+    'Pessoas NB': '#FF8500',  # Variante para NB
+    'Misto': '#2D6A4F',       # Verde
+    'Indeterminado': '#888888'
+}
 
 @st.cache_data(ttl=3600)
 def carregar_dados():
@@ -244,7 +250,7 @@ elif page == "page_methodology":
 
 elif page == "page_history":
     st.markdown(f"<div class='section-title'>{TABS[2]}</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-subtitle'>Participação percentual de Integrantes Individuais por gênero nos festivais brasileiros</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-subtitle'>Participação percentual de Integrantes Individuais por gênero</div>", unsafe_allow_html=True)
     
     evo = df.groupby('Ano')[['Mulheres', 'Homens', 'Pessoas NB']].sum()
     evo['Total'] = evo.sum(axis=1)
@@ -254,82 +260,42 @@ elif page == "page_history":
     
     fig = go.Figure()
     
-    # 1. HOMENS (Primeiro na lista)
+    # 1. HOMENS (Azul)
     fig.add_trace(go.Scatter(
-        x=evo['Ano'], 
-        y=evo['% Homens'], 
-        mode='lines+markers',
-        name='Homens', 
-        line=dict(color='#2E5A6B', width=2.5, dash='dash'),
-        marker=dict(size=7, symbol='diamond'),
-        hovertemplate='Homens: %{y:.1f}%<extra></extra>',
-        legendrank=1 # Garante a posição 1 na legenda
+        x=evo['Ano'], y=evo['% Homens'], mode='lines+markers', name='Homens', 
+        line=dict(color=CORES_GEN['Homens'], width=2.5, dash='dash'),
+        marker=dict(size=7, symbol='diamond'), hovertemplate='Homens: %{y:.1f}%<extra></extra>'
     ))
 
-    # 2. MULHERES (Segundo na lista)
+    # 2. MULHERES (Roxo)
     fig.add_trace(go.Scatter(
-        x=evo['Ano'], 
-        y=evo['% Mulheres'], 
-        mode='lines+markers',
-        name='Mulheres', 
-        line=dict(color='#C75B39', width=3),
-        marker=dict(size=8),
-        hovertemplate='Mulheres: %{y:.1f}%<extra></extra>',
-        legendrank=2
+        x=evo['Ano'], y=evo['% Mulheres'], mode='lines+markers', name='Mulheres', 
+        line=dict(color=CORES_GEN['Mulheres'], width=3),
+        marker=dict(size=8), hovertemplate='Mulheres: %{y:.1f}%<extra></extra>'
     ))
     
-    # 3. PESSOAS NB (Terceiro na lista)
+    # 3. PESSOAS NB (Laranja)
     fig.add_trace(go.Scatter(
-        x=evo['Ano'], 
-        y=evo['% Pessoas NB'], 
-        mode='lines+markers',
-        name='Não-binários', 
-        line=dict(color='#D4A017', width=2.5, dash='dot'),
-        marker=dict(size=7, symbol='square'),
-        hovertemplate='Não-binários: %{y:.1f}%<extra></extra>',
-        legendrank=3
+        x=evo['Ano'], y=evo['% Pessoas NB'], mode='lines+markers', name='Não-binários', 
+        line=dict(color=CORES_GEN['Pessoas NB'], width=2.5, dash='dot'),
+        marker=dict(size=7, symbol='square'), hovertemplate='Não-binários: %{y:.1f}%<extra></extra>'
     ))
-    
-    fig.add_hline(y=50, line_dash="dot", line_color="#888", opacity=0.6,
-                  annotation_text="paridade", annotation_position="right",
-                  annotation_font_size=9, annotation_font_color="#777")
     
     fig.update_layout(
-        height=420, 
-        hovermode="x unified",  # Segue a ordem das traces definida acima
-        legend=dict(
-            orientation="h", 
-            yanchor="bottom", 
-            y=1.02, 
-            xanchor="center", 
-            x=0.5, 
-            font_size=11,
-            traceorder="normal"  # Mantém a ordem: Homens -> Mulheres -> NB
-        ),
-        xaxis=dict(dtick=1, gridcolor='#eee'), 
-        yaxis=dict(range=[0, 100], ticksuffix="%", gridcolor='#eee'),
-        plot_bgcolor='white', 
-        paper_bgcolor='white', 
-        font=dict(size=11)
+        height=420, hovermode="x unified", legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
+        xaxis=dict(dtick=1, gridcolor='#eee'), yaxis=dict(range=[0, 100], ticksuffix="%", gridcolor='#eee'),
+        plot_bgcolor='white', paper_bgcolor='white'
     )
     
-    fig = add_source(fig, "Lima Arruda, 2026", "top")
+    fig = add_source(fig, "Lima Arruda, 2016-2024", "top")
     st.plotly_chart(fig, use_container_width=True)
-    
-    st.caption("Uso livre para fins informativos e de pesquisa, mediante citação obrigatória de fonte e autoria — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)")
-    
-    with st.expander("Dados consolidados"):
-        tab = evo[['Ano', 'Homens', 'Mulheres', 'Pessoas NB', 'Total']].copy() # Reordenado na tabela também
-        tab = tab.astype(int)
-        tab.columns = ['Ano', 'Homens', 'Mulheres', 'Não-binárias', 'Total']
-        st.dataframe(tab, use_container_width=True, hide_index=True)
 
 # --- PÁGINA 4: PANORAMA ANUAL ---
 elif page == "page_annual":
     st.markdown(f"<div class='section-title'>{TABS[3]}</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-subtitle'>Consolidado anual e ranking de festivais</div>", unsafe_allow_html=True)
     
-    # CSS para os cards de métricas (limpos e sem setas)
+   
     st.markdown("""
         <style>
             .custom-metric-box {
@@ -347,13 +313,13 @@ elif page == "page_annual":
     """, unsafe_allow_html=True)
 
     try:
-        # 1. FILTRAGEM E PREPARAÇÃO
+   
         anos = sorted(df['Ano'].unique())
         st.markdown("**Ano**")
         ano = st.selectbox("Selecione o ano:", anos, index=len(anos)-1, label_visibility="collapsed")
         d = df[df['Ano'] == ano].copy()
         
-        # Garantir que as colunas de gênero sejam numéricas para os cálculos
+       
         for col in ['Mulheres', 'Homens', 'Pessoas NB']:
             if col in d.columns:
                 d[col] = pd.to_numeric(d[col], errors='coerce').fillna(0)
@@ -364,19 +330,18 @@ elif page == "page_annual":
         soma_nb = int(d['Pessoas NB'].sum())
         total_ints = soma_m + soma_h + soma_nb
 
-        # --- LÓGICA CORRIGIDA PARA PESSOA TRANS (SINGULAR + TEXTO) ---
-        # Procuramos a coluna ignorando maiúsculas/minúsculas e espaços
+       
         d.columns = d.columns.str.strip()
         col_trans_name = "Pessoas Trans" 
         
         soma_trans = 0
         if col_trans_name in d.columns:
-            # Contamos quantas vezes o valor "Sim" aparece (independente de maiúscula)
+           
             soma_trans = len(d[d[col_trans_name].astype(str).str.lower().str.strip() == 'sim'])
         
         pct_trans = (soma_trans / total_ints * 100) if total_ints > 0 else 0
 
-        # 2. DESENHO DOS CARDS
+
         def draw_card(col, titulo, valor, sub):
             col.markdown(f"""
                 <div class="custom-metric-box">
@@ -400,7 +365,7 @@ elif page == "page_annual":
         
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # --- 3. CALLOUT: FATO EXTRA TRANS (Agora funcionando!) ---
+      
         if soma_trans > 0:
             st.info(f"""
                 **Diversidade Trans:** identificamos a presença de **{soma_trans}** pessoas autodeclaradas trans nos palcos de {ano}. 
@@ -457,7 +422,7 @@ elif page == "page_festival":
 
     st.markdown("<div class='section-subtitle'>Raio-X detalhado por edição</div>", unsafe_allow_html=True)
     
-    # CSS para os cards padronizados
+   
     st.markdown("""
         <style>
             .custom-metric-box {
@@ -483,12 +448,12 @@ elif page == "page_festival":
         </style>
     """, unsafe_allow_html=True)
 
-    # Seleção do Festival
+  
     festivais_lista = sorted(df['Festival'].dropna().unique())
     fest = st.selectbox("Escolha um Festival:", festivais_lista)
     df_fest = df[df['Festival'] == fest].copy()
     
-    # 1. GRÁFICO DE EVOLUÇÃO (Com correção de anos quebrados)
+   
     evo = df_fest.groupby('Ano')[['Mulheres', 'Homens', 'Pessoas NB']].sum()
     evo['Total'] = evo.sum(axis=1)
     evo = evo[evo['Total'] > 0].reset_index()
@@ -498,10 +463,10 @@ elif page == "page_festival":
     fig = px.line(evo, x='Ano', y='% Mulheres', markers=True)
     fig.update_traces(line=dict(color='#000', width=3), marker=dict(size=10, color='#000'))
     
-    # FIX: Forçando o eixo X a mostrar apenas ANOS INTEIROS
+    
     fig.update_xaxes(
         dtick=1, 
-        tickformat='d', # 'd' força o formato de número inteiro (sem .5)
+        tickformat='d', 
         showgrid=False
     )
     
@@ -514,13 +479,13 @@ elif page == "page_festival":
     )
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc")
     
-    # Adiciona a fonte dentro do gráfico para o download
+  
     fig = add_source(fig, "Arruda, 2016-2024", "top")
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': True})
     
     st.divider()
     
-    # 2. ANÁLISE DETALHADA DA EDIÇÃO
+ 
     st.markdown("**Análise por Edição**")
     anos_disp = sorted(df_fest['Ano'].dropna().unique())
     
@@ -530,7 +495,7 @@ elif page == "page_festival":
     
     df_ano = df_fest[df_fest['Ano'] == ano_sel].copy()
     
-    # Lógica da Fonte (Coluna 'Cartaz') - Ajuste visual do link
+ 
     link_fonte = None
     if 'Cartaz' in df_ano.columns:
         valid_links = df_ano['Cartaz'].dropna().unique()
@@ -539,13 +504,13 @@ elif page == "page_festival":
 
     with col_btn:
         if link_fonte:
-            st.link_button("🔗 Ver Lineup Oficial (Fonte)", link_fonte, use_container_width=True)
+            st.link_button("Fonte", link_fonte, use_container_width=True)
         else:
             st.button("Fonte Indisponível", disabled=True, use_container_width=True)
 
-    # Métricas da Edição
+   
     total_atos = len(df_ano)
-    for c in ['Mulheres', 'Homens', 'Pessoas NB', 'Pessoa Trans']:
+    for c in ['Mulheres', 'Homens', 'Pessoas NB', 'Pessoas Trans']:
         if c in df_ano.columns:
             df_ano[c] = pd.to_numeric(df_ano[c], errors='coerce').fillna(0)
 
@@ -559,9 +524,8 @@ elif page == "page_festival":
         if df_ano['Pessoa Trans'].dtype in [np.float64, np.int64]:
             s_trans = int(df_ano['Pessoa Trans'].sum())
         else:
-            s_trans = len(df_ano[df_ano['Pessoa Trans'].astype(str).str.lower().str.strip() == 'sim'])
+            s_trans = len(df_ano[df_ano['Pessoas Trans'].astype(str).str.lower().str.strip() == 'sim'])
 
-    # Função dos cards
     def draw_fest_card(col, title, value, footer):
         col.markdown(f"""
             <div class="custom-metric-box">
@@ -584,7 +548,7 @@ elif page == "page_festival":
 
     if s_trans > 0:
         pct_t = (s_trans / total_pess * 100) if total_pess > 0 else 0
-        st.info(f"♀️⚧ **Diversidade Trans:** Esta edição contou com {s_trans} integrante(s) trans ({pct_t:.1f}% do palco).")
+        st.info(f"**Diversidade Trans:** esta edição contou com {s_trans} integrante(s) trans ({pct_t:.1f}% do palco).")
 
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -658,18 +622,20 @@ elif page == "page_artists":
     st.markdown(f"<div class='section-title'>{TABS[6]}</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-subtitle'>Análise detalhada por tipo de ato e formação</div>", unsafe_allow_html=True)
     
-    # Seletor de Ano com rótulo acima
-    st.markdown("**Ano**")
+=    st.markdown("**Ano**")
     anos = sorted(df['Ano'].unique())
     ano_sel = st.selectbox("Selecione o ano:", anos, index=len(anos)-1, label_visibility="collapsed")
     da = df[df['Ano'] == ano_sel].copy()
     
-    # NOVOS NOMES DE ABAS
     t1, t2, t3, t4 = st.tabs(["Atos Musicais", "Grupos", "Solistas", "Recorrência"])
     
-    # PALETA DE CORES PADRONIZADA
-    CORES_PIE = {'Solista': '#2E5A6B', 'Duo': '#94A3B8', 'Grupo': '#C75B39', 'Banda': '#5E3B76'}
-    CORES_GEN = {'Homens': '#2E5A6B', 'Mulheres': '#C75B39', 'Misto': '#D4A017', 'Não-binárie': '#8B5A8B'}
+   CORES_PIE = {'Solista': '#3D2B56', 'Duo': '#94A3B8', 'Grupo': '#2D6A4F', 'Banda': '#1B4332'}
+    CORES_GEN_ART = {
+        'Homens': CORES_GEN['Homens'], 
+        'Mulheres': CORES_GEN['Mulheres'], 
+        'Misto': CORES_GEN['Misto'], 
+        'Não-binárie': CORES_GEN['Pessoas NB']
+    }
 
     with t1:
         st.markdown("### Atos Musicais")
@@ -694,7 +660,6 @@ elif page == "page_artists":
             rs = grupos['Formacao'].value_counts()
             total_g = len(grupos)
             
-            # CARDS ELEGANTES - ORDEM: HOMENS, MULHERES, MISTOS
             c1, c2, c3 = st.columns(3)
             def draw_card_g(col, title, val_abs, total):
                 pct = (val_abs/total*100) if total > 0 else 0
@@ -710,11 +675,10 @@ elif page == "page_artists":
             draw_card_g(c2, "Só Mulheres", rs.get('Mulheres', 0), total_g)
             draw_card_g(c3, "Grupos Mistos", rs.get('Misto', 0), total_g)
 
-            # GRÁFICO DE LINHAS - ORDEM: HOMENS, MULHERES, MISTO
             st.markdown("<br>**Evolução histórica da formação de grupos**", unsafe_allow_html=True)
             ev_g = df[df['Tipo'] != 'Solista'].groupby(['Ano', 'Formacao']).size().unstack(fill_value=0).reset_index()
             fig_g = go.Figure()
-            # Ordem forçada no hover e legenda
+
             for f_name in ['Homens', 'Mulheres', 'Misto']:
                 if f_name in ev_g.columns:
                     fig_g.add_trace(go.Scatter(x=ev_g['Ano'], y=ev_g[f_name], name=f_name, mode='lines+markers',
@@ -742,7 +706,6 @@ elif page == "page_artists":
             rs_s = solistas['Gênero_Simpl'].value_counts()
             total_s = len(solistas)
 
-            # CARDS ELEGANTES - ORDEM: HOMENS, MULHERES
             cs1, cs2 = st.columns(2)
             def draw_card_s(col, title, val_abs, total):
                 pct = (val_abs/total*100) if total > 0 else 0
@@ -757,9 +720,8 @@ elif page == "page_artists":
             draw_card_s(cs1, "Homens", rs_s.get('Homens', 0), total_s)
             draw_card_s(cs2, "Mulheres (+ NB)", rs_s.get('Mulheres', 0), total_s)
 
-            # GRÁFICO DE LINHAS - EVOLUÇÃO SOLISTAS
             st.markdown("<br>**Evolução histórica de solistas**", unsafe_allow_html=True)
-            # Pre-processamento para o histórico de solistas
+
             df_sol = df[df['Tipo'] == 'Solista'].copy()
             df_sol['G_Hist'] = df_sol.apply(gs, axis=1)
             ev_s = df_sol.groupby(['Ano', 'G_Hist']).size().unstack(fill_value=0).reset_index()
@@ -797,30 +759,26 @@ elif page == "page_comparator":
     st.markdown(f"<div class='section-title'>{TABS[8]}</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-subtitle'>Compare a representatividade entre dois festivais</div>", unsafe_allow_html=True)
     
-    # Seleção dos Festivais
     fests = sorted(df['Festival'].dropna().unique())
     c1, c2 = st.columns(2)
     with c1: f1 = st.selectbox("Festival A:", fests, index=0)
     with c2: f2 = st.selectbox("Festival B:", fests, index=1 if len(fests)>1 else 0)
     
-    # Processamento dos Dados
     def get_evo(f_name):
         d_f = df[df['Festival'] == f_name].copy()
-        # Garante que os números são inteiros antes do cálculo
+
         for col in ['Mulheres', 'Homens', 'Pessoas NB']:
             d_f[col] = pd.to_numeric(d_f[col], errors='coerce').fillna(0)
         
-        # Agrupa por ano somando os integrantes
         ev = d_f.groupby('Ano')[['Mulheres', 'Homens', 'Pessoas NB']].sum()
         ev['Total'] = ev.sum(axis=1)
-        # Calcula a porcentagem real (Mulheres + NB) / Total
+
         ev['% Repr'] = ((ev['Mulheres'] + ev['Pessoas NB']) / ev['Total'] * 100).round(1)
         return ev.reset_index()
 
     df_f1 = get_evo(f1)
     df_f2 = get_evo(f2)
     
-    # Montagem do Gráfico Comparativo
     fig = go.Figure()
     
     # Festival A
@@ -850,7 +808,6 @@ elif page == "page_comparator":
     fig = add_source(fig, "Arruda, 2016-2024", "top")
     st.plotly_chart(fig, use_container_width=True)
 
-    # Cards Comparativos discretos (Ano mais recente)
     st.markdown("### Situação na edição mais recente")
     m1, m2 = st.columns(2)
     
@@ -886,11 +843,9 @@ elif page == "page_heatmap":
         x=[str(int(c)) for c in pv.columns],
         y=pv.index,
         colorscale=[
-            [0.0, '#F8F6FA'],
-            [0.25, '#E8E0F0'],
-            [0.5, '#C8B8D8'],
-            [0.75, '#A080B8'],
-            [1.0, '#704080']
+            [0.0, '#F2F0F7'], # Roxo clarinho
+            [0.5, '#9D4EDD'], # Roxo médio
+            [1.0, '#7B2CBF']  # Roxo vibrante (Mulheres)
         ],
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
@@ -916,8 +871,8 @@ st.markdown("<hr style='margin: 2rem 0 1rem; opacity: 0.3;'>", unsafe_allow_html
 st.markdown(f"""
 <div style='text-align: center; color: #666; font-size: 0.75rem; line-height: 1.6;'>
     {SOURCE_LONG}<br>
-    Última atualização de dados: {datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC")} </br>
     Thabata Lima Arruda · mulheresnosfestivais@proton.me<br>
+    Última atualização de dados: {datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC")} </br>
     Uso livre para fins informativos e de pesquisa, mediante citação obrigatória de fonte e autoria. <br>
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt">CC BY-NC-SA 4.0</a>
 </div>
