@@ -7,37 +7,42 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="📊", layout="wide")
 
-# --- AJUSTE FINO: ESCONDER LOGOS MAS MANTER O MENU LATERAL ---
+# --- AJUSTE DEFINITIVO PARA LIMPAR O TOPO NO CELULAR ---
 st.markdown("""
     <style>
-        /* 1. Esconde o menu de opções do Streamlit (os 3 pontinhos) */
+        /* 1. Esconde o menu de 3 pontinhos e o rodapé padrão */
         #MainMenu {visibility: hidden;}
-        
-        /* 2. Esconde o rodapé 'Made with Streamlit' */
         footer {visibility: hidden;}
         
-        /* 3. Remove especificamente o link do GitHub e decorações do header, 
-              mas deixa o botão do Sidebar visível */
-        header {
-            background-color: rgba(0,0,0,0);
+        /* 2. Esconde o botão de Deploy e o link do GitHub no topo */
+        .stAppDeployButton {
+            display: none !important;
         }
         
-        /* Esconde os botões da direita (GitHub, deploy, etc) */
-        .stAppDeployButton, .st-emotion-cache-zq5wmm {
+        /* 3. Remove a barra do GitHub/Streamlit que aparece no topo */
+        header[data-testid="stHeader"] {
+            background-color: rgba(0,0,0,0) !important;
+            color: rgba(0,0,0,0) !important;
+        }
+        
+        /* 4. Esconde especificamente o link do repositório/Hosted by */
+        header[data-testid="stHeader"] a {
             display: none !important;
         }
 
-        /* Garante que o botão do menu lateral (as setas) continue visível e clicável */
-        .st-emotion-cache-16idsys, .st-emotion-cache-1avcm0n {
+        /* 5. GARANTE que o botão do Sidebar (as setas) continue visível */
+        button[data-testid="stBaseButton-headerNoPadding"] {
             visibility: visible !important;
+            color: #000000 !important; /* Cor da setinha para aparecer no fundo branco */
         }
 
-        /* Ajusta o topo para o conteúdo não ficar colado lá em cima */
+        /* Ajusta o respiro do topo */
         .main .block-container {
             padding-top: 2rem;
         }
     </style>
 """, unsafe_allow_html=True)
+
 st.markdown("""
     <style>
         /* Corrigir corte no topo e alinhar com sidebar */
