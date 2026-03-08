@@ -6,7 +6,42 @@ from datetime import datetime, timezone
 import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="📊", layout="wide")
+# --- LIMPEZA TOTAL DO TOPO (VERSÃO MOBILE REFORÇADA) ---
+st.markdown("""
+    <style>
+        /* 1. Esconde o menu de 3 pontinhos e o rodapé */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        
+        /* 2. Esconde o Header inteiro (Barra de cima) */
+        header[data-testid="stHeader"] {
+            background-color: rgba(0,0,0,0) !important;
+            border-bottom: none !important;
+        }
 
+        /* 3. Esconde TODOS os links e logos que moram dentro do Header */
+        header[data-testid="stHeader"] a, 
+        header[data-testid="stHeader"] img,
+        header[data-testid="stHeader"] .st-emotion-cache-1avcm0n {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* 4. FORÇA a volta apenas da setinha do Sidebar (Botão) */
+        button[data-testid="stBaseButton-headerNoPadding"],
+        button[aria-label="Open sidebar"] {
+            visibility: visible !important;
+            display: block !important;
+            color: #000000 !important; /* Cor da seta preta no fundo branco */
+            z-index: 9999 !important;
+        }
+
+        /* Ajusta o espaçamento para o título não bater no topo */
+        .main .block-container {
+            padding-top: 3rem !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
     <style>
