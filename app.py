@@ -7,41 +7,6 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="📊", layout="wide")
 
-# --- AJUSTE DEFINITIVO PARA LIMPAR O TOPO NO CELULAR ---
-st.markdown("""
-    <style>
-        /* 1. Esconde o menu de 3 pontinhos e o rodapé padrão */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        
-        /* 2. Esconde o botão de Deploy e o link do GitHub no topo */
-        .stAppDeployButton {
-            display: none !important;
-        }
-        
-        /* 3. Remove a barra do GitHub/Streamlit que aparece no topo */
-        header[data-testid="stHeader"] {
-            background-color: rgba(0,0,0,0) !important;
-            color: rgba(0,0,0,0) !important;
-        }
-        
-        /* 4. Esconde especificamente o link do repositório/Hosted by */
-        header[data-testid="stHeader"] a {
-            display: none !important;
-        }
-
-        /* 5. GARANTE que o botão do Sidebar (as setas) continue visível */
-        button[data-testid="stBaseButton-headerNoPadding"] {
-            visibility: visible !important;
-            color: #000000 !important; /* Cor da setinha para aparecer no fundo branco */
-        }
-
-        /* Ajusta o respiro do topo */
-        .main .block-container {
-            padding-top: 2rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 st.markdown("""
     <style>
