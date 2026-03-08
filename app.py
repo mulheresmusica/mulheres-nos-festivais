@@ -9,6 +9,23 @@ st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_i
 
 st.markdown("""
     <style>
+        /* Esconde o menu de hambúrguer (canto superior direito) */
+        #MainMenu {visibility: hidden;}
+        
+        /* Esconde o rodapé "Made with Streamlit" */
+        footer {visibility: hidden;}
+        
+        /* Esconde o ícone do GitHub e outros botões do topo */
+        header {visibility: hidden;}
+        
+        /* Ajusta o espaçamento do topo que sobra após esconder o header */
+        .main .block-container {
+            padding-top: 2rem;
+        }
+    </style>
+""", unsafe_allow_html=True)
+st.markdown("""
+    <style>
         /* Corrigir corte no topo e alinhar com sidebar */
         .block-container {
             padding-top: 6.5rem !important;  /* Igual ao padding do sidebar */
