@@ -622,7 +622,7 @@ elif page == "page_artists":
     st.markdown(f"<div class='section-title'>{TABS[6]}</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-subtitle'>Análise detalhada por tipo de ato e formação</div>", unsafe_allow_html=True)
     
-=    st.markdown("**Ano**")
+    st.markdown("**Ano**")
     anos = sorted(df['Ano'].unique())
     ano_sel = st.selectbox("Selecione o ano:", anos, index=len(anos)-1, label_visibility="collapsed")
     da = df[df['Ano'] == ano_sel].copy()
