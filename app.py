@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -125,8 +126,18 @@ with st.sidebar:
         if st.button(lab, use_container_width=True, type=btn_type): st.session_state['page'] = k; st.rerun()
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     st.caption("A democratização destes dados é parte fundamental deste projeto. Você pode compartilhar, copiar e redistribuir este conteúdo em qualquer suporte ou formato, desde que atribua o crédito apropriadamente à autora e indique o link desta plataforma. — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)")
-    st.link_button("☕ Buy Me a Coffee", "https://buymeacoffee.com/mulheresnosfestivais", use_container_width=True)
-
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+    
+    # Código para renderizar o botão oficial do Buy Me a Coffee
+    button_html = """
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+            data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
+            data-emoji="☕" data-font="Cookie" data-text="Apoiar pesquisa" data-outline-color="#ffffff" 
+            data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
+    """
+    
+    # Centraliza o botão na sidebar
+    components.html(f"<div style='display: flex; justify-content: center;'>{button_html}</div>", height=70)
 page = st.session_state['page']
 
 if page == "page_about":
