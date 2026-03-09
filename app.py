@@ -632,16 +632,16 @@ elif page == "page_geo":
 # --- PÁGINA 7: PANORAMA ARTÍSTICO ---
 elif page == "page_artists":
     st.markdown(f"<div class='section-title'>{TABS[6]}</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-subtitle'>Análise detalhada por tipo de ato e formação</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-subtitle'>Análise detalhada por Ato Musical</div>", unsafe_allow_html=True)
     
     st.markdown("**Ano**")
     anos = sorted(df['Ano'].unique())
     ano_sel = st.selectbox("Selecione o ano:", anos, index=len(anos)-1, label_visibility="collapsed")
     da = df[df['Ano'] == ano_sel].copy()
     
-    t1, t2, t3, t4 = st.tabs(["Atos Musicais", "Grupos", "Solistas", "Recorrência"])
+    t1, t2, t3, t4 = st.tabs(["Formações", "Banda/Duo", "Solistas", "Artistas Recorrentes"])
     
-    CORES_PIE = {'Solista': '#a10093', 'Banda/Duo': '#d466b3'}
+    CORES_PIE = {'Solista': '#a14261', 'Banda/Duo': '#9e1542'}
     CORES_GEN_ART = {
         'Homens': CORES_GEN['Homens'], 
         'Mulheres': CORES_GEN['Mulheres'], 
@@ -650,7 +650,7 @@ elif page == "page_artists":
     }
 
     with t1:
-        st.markdown("### Atos Musicais")
+        st.markdown("### Formações")
         st.caption("Performances ao vivo: artistas solo vs. formações coletivas (duos, trios, bandas e grupos).")
     
     # --- TRUQUE PARA TER APENAS 2 CATEGORIAS ---
@@ -673,8 +673,8 @@ elif page == "page_artists":
         st.plotly_chart(fig, use_container_width=True)
 
     with t2:
-        st.markdown("### Grupos")
-        st.caption("Duo ou grupo musical. Categorias: Mulheres (exclusivamente mulheres e/ou pessoas NB), Homens (apenas homens) e Grupos mistos (pelo menos uma mulher ou pessoa NB na formação).")
+        st.markdown("### Banda/Duo")
+        st.caption("Distribuição percentual de Banda/Duo. Categorias: Mulheres (formações exclusivamente com mulheres e/ou pessoas NB), Homens (formações exclusivamente com homens) e Grupos Mistos (formações com pelo menos uma mulher ou pessoa NB).")
         
         grupos = da[da['Tipo'] != 'Solista'].copy()
         if len(grupos) > 0:
@@ -688,19 +688,19 @@ elif page == "page_artists":
                     <div style="background-color: #f8f9fa; border: 1px solid #eee; padding: 15px; border-radius: 8px; text-align: center;">
                         <div style="font-size: 0.8rem; color: #666;">{title}</div>
                         <div style="font-size: 1.5rem; font-weight: 800; color: #000;">{pct:.1f}%</div>
-                        <div style="font-size: 0.75rem; color: #888;">{int(val_abs)} grupos</div>
+                        <div style="font-size: 0.75rem; color: #888;">{int(val_abs)} banda/duo</div>
                     </div>
                 """, unsafe_allow_html=True)
 
-            draw_card_g(c1, "Só Homens", rs.get('Homens', 0), total_g)
-            draw_card_g(c2, "Só Mulheres", rs.get('Mulheres', 0), total_g)
+            draw_card_g(c1, "Homens", rs.get('Homens', 0), total_g)
+            draw_card_g(c2, "Mulheres", rs.get('Mulheres', 0), total_g)
             draw_card_g(c3, "Grupos Mistos", rs.get('Misto', 0), total_g)
 
-            st.markdown("<br>**Evolução histórica da formação de grupos**", unsafe_allow_html=True)
+            st.markdown("<br>**Evolução histórica da formação Banda/Duo**", unsafe_allow_html=True)
             ev_g = df[df['Tipo'] != 'Solista'].groupby(['Ano', 'Formacao']).size().unstack(fill_value=0).reset_index()
             fig_g = go.Figure()
 
-            for f_name in ['Homens', 'Mulheres', 'Misto']:
+            for f_name in ['Homens', 'Mulheres', 'Grupos Mistos']:
                 if f_name in ev_g.columns:
                     fig_g.add_trace(go.Scatter(x=ev_g['Ano'], y=ev_g[f_name], name=f_name, mode='lines+markers',
                                              line=dict(color=CORES_GEN.get(f_name), width=3),
