@@ -449,12 +449,13 @@ elif page == "page_festival":
             .metric-footer { font-size: 0.75rem; color: #888; margin-top: 2px; }
             .exclusion-legend { 
                 background-color: #f9f9f9; 
-                padding: 18px; 
+                padding: 25px; 
                 border-radius: 5px; 
                 border: 1px solid #eee; 
                 font-size: 0.85rem; 
                 color: #555;
-                margin-top: 20px;
+                margin-top: 35px;
+                line-height: 1.6;
             }
         </style>
     """, unsafe_allow_html=True)
