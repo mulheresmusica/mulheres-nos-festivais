@@ -675,7 +675,7 @@ elif page == "page_artists":
         st.markdown("### Banda/Duo")
         # Callout explicativo
         st.info("""
-            Esta aba contabiliza apenas formações com **2 ou mais integrantes**. As categorias são: **Mulheres**, para bandas formadas exclusivamente por mulheres ou pessoas NB; **Homens**, para bandas formadas exclusivamente por homens; e **Grupos Mistos**, para formações que incluem pelo menos uma mulher ou pessoa NB.
+            Esta aba contabiliza apenas formações com **2 ou mais integrantes**. </br> As categorias são: **Mulheres**, para bandas formadas exclusivamente por mulheres ou pessoas NB; **Homens**, para bandas formadas exclusivamente por homens; e **Grupos Mistos**, para formações que incluem pelo menos uma mulher ou pessoa NB.
 
         """)
         grupos = da[da['Tipo'] != 'Solista'].copy()
