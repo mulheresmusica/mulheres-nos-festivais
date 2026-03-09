@@ -572,8 +572,6 @@ elif page == "page_festival":
             if idx % 3 == 0: l_col1.markdown(f"• {artista}")
             elif idx % 3 == 1: l_col2.markdown(f"• {artista}")
             else: l_col3.markdown(f"• {artista}")
-
-        st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
             
         st.markdown(f"""
             <div class="exclusion-legend">
@@ -587,7 +585,7 @@ elif page == "page_festival":
             </div>
         """, unsafe_allow_html=True)
 
-
+st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
 
 
 elif page == "page_geo":
