@@ -449,12 +449,11 @@ elif page == "page_festival":
             .metric-footer { font-size: 0.75rem; color: #888; margin-top: 2px; }
             .exclusion-legend { 
                 background-color: #f9f9f9; 
-                padding: 25px; 
+                padding: 24px; 
                 border-radius: 5px; 
                 border: 1px solid #eee; 
                 font-size: 0.85rem; 
                 color: #555;
-                margin-top: 35px;
                 line-height: 1.6;
             }
         </style>
@@ -572,6 +571,8 @@ elif page == "page_festival":
             if idx % 3 == 0: l_col1.markdown(f"• {artista}")
             elif idx % 3 == 1: l_col2.markdown(f"• {artista}")
             else: l_col3.markdown(f"• {artista}")
+
+        st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
             
         st.markdown(f"""
             <div class="exclusion-legend">
