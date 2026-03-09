@@ -147,8 +147,7 @@ if page == "page_about":
     # Texto principal
     st.markdown("""
     <div class='body-text'>
-    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo da última década.<br>
-    Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.<br>
+    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo da última década. Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.  
     Este painel tem como missão evidenciar a desigualdade de oportunidades e de postos de trabalho no mercado de festivais, com olhar atento às mulheres que fazem da música e do palco sua profissão. Concebido como um projeto vivo, este espaço de consulta para pesquisas e profissionais do mercado é expandido gradualmente, integrando novos festivais à medida que consolidam sua trajetória e amostragem no cenário nacional.
     </div>
     """, unsafe_allow_html=True)
