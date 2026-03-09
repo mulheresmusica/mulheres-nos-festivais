@@ -641,7 +641,7 @@ elif page == "page_artists":
     
     t1, t2, t3, t4 = st.tabs(["Atos Musicais", "Grupos", "Solistas", "Recorrência"])
     
-    CORES_PIE = {'Solista': '##a10093', 'Duo': '#d466b3', 'Grupo': '#d466b3', 'Banda': '#d466b3'}
+    CORES_PIE = {'Solista': '#a10093', 'Duo': '#d466b3', 'Grupo': '#d466b3', 'Banda': '#d466b3'}
     CORES_GEN_ART = {
         'Homens': CORES_GEN['Homens'], 
         'Mulheres': CORES_GEN['Mulheres'], 
