@@ -654,9 +654,8 @@ elif page == "page_artists":
     with t1:
         st.markdown("### Formações")
         st.info("""
-            Percentual dos atos musicais por tipo de formação.  
-            **Banda/Duo:** grupos com 2 ou mais integrantes. **Solistas:** artistas que se apresentam individualmente, sem formação fixa com outros integrantes.
-
+            Distribuição percentual de atos musicais por tipo de formação.  
+            **Banda/Duo:** formações com 2 ou mais integrantes. **Solistas:** artistas que se apresentam individualmente.
         """)
     
         da_pie = da.copy()
@@ -679,8 +678,8 @@ elif page == "page_artists":
         st.markdown("### Banda/Duo")
         # Callout explicativo
         st.info("""
-            Esta aba contabiliza apenas formações com **2 ou mais integrantes**. </br> As categorias são: **Mulheres**, para bandas formadas exclusivamente por mulheres ou pessoas NB; **Homens**, para bandas formadas exclusivamente por homens; e **Grupos Mistos**, para formações que incluem pelo menos uma mulher ou pessoa NB.
-
+            Distribuição percentual de bandas e duos por categoria de formação.  
+            Inclui apenas formações com 2 ou mais integrantes. **Mulheres:** exclusivamente mulheres ou pessoas NB; **Homens:** exclusivamente homens; **Grupos Mistos:** pelo menos uma mulher ou pessoa NB.
         """)
         grupos = da[da['Tipo'] != 'Solista'].copy()
         
@@ -730,8 +729,10 @@ elif page == "page_artists":
 
     with t3:
         st.markdown("### Solistas")
-        st.caption("Atos musicais onde a comunicação é compreendida como artista solo. Categorias: Mulheres (mulheres + pessoas NB) e Homens.")
-        
+        st.info("""
+            Distribuição percentual de solistas por gênero. Inclui apenas atos musicais classificados como artista solo.  
+            **Mulheres:** mulheres e pessoas NB; **Homens:** homens.
+        """)        
         solistas = da[da['Tipo'] == 'Solista'].copy()
         if len(solistas) > 0:
             def gs(r):
