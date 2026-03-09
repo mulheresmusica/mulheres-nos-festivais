@@ -674,16 +674,11 @@ elif page == "page_artists":
     with t2:
         st.markdown("### Banda/Duo")
         st.caption("Distribuição percentual de Banda/Duo. Categorias: Mulheres, Homens e Grupos Mistos.")
-
-        with t2:
-        st.markdown("### Banda/Duo")
-        # Callout explicativo
         st.info("""
             **Critério de Análise:** Esta aba contabiliza apenas formações com 2 ou mais integrantes. 
             Dividimos entre bandas formadas exclusivamente por homens, exclusivamente por mulheres/NB 
             ou grupos mistos (pelo menos uma mulher/NB na formação).
         """)
-        
         grupos = da[da['Tipo'] != 'Solista'].copy()
         
         # --- GARANTIR QUE 'Misto' VIRE 'Grupos Mistos' PARA O GRÁFICO ---
