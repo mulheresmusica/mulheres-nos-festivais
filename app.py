@@ -654,7 +654,7 @@ elif page == "page_artists":
     with t1:
         st.markdown("### Formações")
         st.info("""
-            Percentual dos atos musicais por tipo de formação.<br>
+            Percentual dos atos musicais por tipo de formação.  
             **Banda/Duo:** grupos com 2 ou mais integrantes. **Solistas:** artistas que se apresentam individualmente, sem formação fixa com outros integrantes.
 
         """)
