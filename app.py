@@ -641,11 +641,13 @@ elif page == "page_artists":
     
     t1, t2, t3, t4 = st.tabs(["Formações", "Banda/Duo", "Solistas", "Artistas Recorrentes"])
     
-    CORES_PIE = {'Solista': '#a14261', 'Banda/Duo': '#9e1542'}
+    # --- AJUSTE DE CORES PIE (Solista mais claro) ---
+    CORES_PIE = {'Solista': '#c97792', 'Banda/Duo': '#9e1542'}
+    
     CORES_GEN_ART = {
         'Homens': CORES_GEN['Homens'], 
         'Mulheres': CORES_GEN['Mulheres'], 
-        'Misto': CORES_GEN['Misto'], 
+        'Grupos Mistos': CORES_GEN['Misto'],  # Mapeando o novo nome para a cor verde
         'Não-binárie': CORES_GEN['Pessoas NB']
     }
 
@@ -653,15 +655,12 @@ elif page == "page_artists":
         st.markdown("### Formações")
         st.caption("Performances ao vivo: artistas solo vs. formações coletivas (duos, trios, bandas e grupos).")
     
-    # --- TRUQUE PARA TER APENAS 2 CATEGORIAS ---
         da_pie = da.copy()
-    # Tudo que não for 'Solista' vira 'Banda/Duo'
         da_pie['Tipo_Simplificado'] = da_pie['Tipo'].apply(lambda x: 'Solista' if x == 'Solista' else 'Banda/Duo')
     
         tp = da_pie['Tipo_Simplificado'].value_counts().reset_index()
         tp.columns = ['Tipo', 'N']
     
-    # Gráfico agora com apenas 2 fatias e as cores certas
         fig = px.pie(tp, values='N', names='Tipo', hole=0.4, 
                      color='Tipo', color_discrete_map=CORES_PIE)
     
@@ -669,14 +668,18 @@ elif page == "page_artists":
         fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
                           legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
     
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+        fig = add_source(fig, "Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
 
     with t2:
         st.markdown("### Banda/Duo")
-        st.caption("Distribuição percentual de Banda/Duo. Categorias: Mulheres (formações exclusivamente com mulheres e/ou pessoas NB), Homens (formações exclusivamente com homens) e Grupos Mistos (formações com pelo menos uma mulher ou pessoa NB).")
+        st.caption("Distribuição percentual de Banda/Duo. Categorias: Mulheres, Homens e Grupos Mistos.")
         
         grupos = da[da['Tipo'] != 'Solista'].copy()
+        
+        # --- GARANTIR QUE 'Misto' VIRE 'Grupos Mistos' PARA O GRÁFICO ---
+        grupos['Formacao'] = grupos['Formacao'].replace({'Misto': 'Grupos Mistos'})
+        
         if len(grupos) > 0:
             rs = grupos['Formacao'].value_counts()
             total_g = len(grupos)
@@ -694,19 +697,26 @@ elif page == "page_artists":
 
             draw_card_g(c1, "Homens", rs.get('Homens', 0), total_g)
             draw_card_g(c2, "Mulheres", rs.get('Mulheres', 0), total_g)
-            draw_card_g(c3, "Grupos Mistos", rs.get('Misto', 0), total_g)
+            draw_card_g(c3, "Grupos Mistos", rs.get('Grupos Mistos', 0), total_g)
 
             st.markdown("<br>**Evolução histórica da formação Banda/Duo**", unsafe_allow_html=True)
-            ev_g = df[df['Tipo'] != 'Solista'].groupby(['Ano', 'Formacao']).size().unstack(fill_value=0).reset_index()
+            
+            # Ajustando o DF histórico para também ter o nome novo
+            df_hist_g = df[df['Tipo'] != 'Solista'].copy()
+            df_hist_g['Formacao'] = df_hist_g['Formacao'].replace({'Misto': 'Grupos Mistos'})
+            
+            ev_g = df_hist_g.groupby(['Ano', 'Formacao']).size().unstack(fill_value=0).reset_index()
             fig_g = go.Figure()
 
+            # O loop agora procura pelo nome correto
             for f_name in ['Homens', 'Mulheres', 'Grupos Mistos']:
                 if f_name in ev_g.columns:
                     fig_g.add_trace(go.Scatter(x=ev_g['Ano'], y=ev_g[f_name], name=f_name, mode='lines+markers',
-                                             line=dict(color=CORES_GEN.get(f_name), width=3),
+                                             line=dict(color=CORES_GEN_ART.get(f_name), width=3),
                                              hovertemplate=f'{f_name}: %{{y}}<extra></extra>'))
+            
             fig_g.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_g = add_source(fig_g, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+            fig_g = add_source(fig_g, "Lima Arruda, 2026", "top")
             st.plotly_chart(fig_g, use_container_width=True)
         else:
             st.info("Sem grupos catalogados para este ano.")
@@ -760,21 +770,26 @@ elif page == "page_artists":
             st.info("Sem solistas catalogados para este ano.")
 
     with t4:
-        st.markdown("### Recorrência")
-        st.caption(f"Artistas que aparecem em múltiplos festivais diferentes no ano de {int(ano_sel)}.")
+        st.markdown("### Artistas Recorrentes")
+        st.caption(f"Artistas que aparecem em múltiplos festivais no ano de {int(ano_sel)}.")
         
         rec = da.groupby('Artista').agg({'Festival': 'nunique'}).reset_index()
         rec = rec[rec['Festival'] >= 2].sort_values('Festival', ascending=False).head(15)
         
         if len(rec) > 0:
+            # --- NOVA ESCALA DE COR: Amarelo/Verde Água (Tealrose) ---
             fig_r = px.bar(rec, x='Festival', y='Artista', orientation='h', 
-                         color='Festival', color_continuous_scale='Blues')
+                         color='Festival', 
+                         color_continuous_scale='Tealrose') # Escala que foge do azul/roxo
+            
             fig_r.update_layout(height=450, yaxis=dict(autorange="reversed"), coloraxis_showscale=False)
             fig_r.update_xaxes(dtick=1)
-            fig_r = add_source(fig_r, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+            fig_r = add_source(fig_r, "Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_r, use_container_width=True)
         else:
             st.info("Nenhum artista com múltiplas aparições em festivais diferentes neste ano.")
+
+
 # --- PÁGINA 9: COMPARADOR ---
 elif page == "page_comparator":
     st.markdown(f"<div class='section-title'>{TABS[8]}</div>", unsafe_allow_html=True)
