@@ -125,13 +125,13 @@ with st.sidebar:
         if st.button(lab, use_container_width=True, type=btn_type): st.session_state['page'] = k; st.rerun()
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     st.caption("A democratização destes dados é parte fundamental deste projeto. Você pode compartilhar, copiar e redistribuir este conteúdo em qualquer suporte ou formato, desde que atribua o crédito apropriadamente à autora e indique o link desta plataforma. — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)")
-    st.link_button("Apoiar pesquisa", "https://www.buymeacoffee.com/seuusuario", use_container_width=True)
+    st.link_button("☕ Buy Me a Coffee", "https://buymeacoffee.com/mulheresnosfestivais", use_container_width=True)
 
 page = st.session_state['page']
 
 if page == "page_about":
     st.markdown(f"<div class='section-title'>{TABS[0]}</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-subtitle'>Trajetória, propósito e autoria</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-subtitle'></div>", unsafe_allow_html=True)
     
     # Texto principal
     st.markdown("""
