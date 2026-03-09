@@ -650,27 +650,27 @@ elif page == "page_artists":
     }
 
     with t1:
-    st.markdown("### Atos Musicais")
-    st.caption("Performances ao vivo: artistas solo vs. formações coletivas (duos, trios, bandas e grupos).")
+        st.markdown("### Atos Musicais")
+        st.caption("Performances ao vivo: artistas solo vs. formações coletivas (duos, trios, bandas e grupos).")
     
     # --- TRUQUE PARA TER APENAS 2 CATEGORIAS ---
-    da_pie = da.copy()
+        da_pie = da.copy()
     # Tudo que não for 'Solista' vira 'Banda/Duo'
-    da_pie['Tipo_Simplificado'] = da_pie['Tipo'].apply(lambda x: 'Solista' if x == 'Solista' else 'Banda/Duo')
+        da_pie['Tipo_Simplificado'] = da_pie['Tipo'].apply(lambda x: 'Solista' if x == 'Solista' else 'Banda/Duo')
     
-    tp = da_pie['Tipo_Simplificado'].value_counts().reset_index()
-    tp.columns = ['Tipo', 'N']
+        tp = da_pie['Tipo_Simplificado'].value_counts().reset_index()
+        tp.columns = ['Tipo', 'N']
     
     # Gráfico agora com apenas 2 fatias e as cores certas
-    fig = px.pie(tp, values='N', names='Tipo', hole=0.4, 
-                 color='Tipo', color_discrete_map=CORES_PIE)
+        fig = px.pie(tp, values='N', names='Tipo', hole=0.4, 
+                     color='Tipo', color_discrete_map=CORES_PIE)
     
-    fig.update_traces(textposition='outside', textinfo='label+percent')
-    fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
-                      legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
+        fig.update_traces(textposition='outside', textinfo='label+percent')
+        fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
+                          legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
-    st.plotly_chart(fig, use_container_width=True)
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+        st.plotly_chart(fig, use_container_width=True)
 
     with t2:
         st.markdown("### Grupos")
