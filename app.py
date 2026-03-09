@@ -103,7 +103,7 @@ def formacao(row):
 
 df['Formacao'] = df.apply(formacao, axis=1)
 
-def add_source(fig, short_text="Lima Arruda, 2026", position="top"):
+def add_source(fig, short_text="Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", position="bottom"):
     if position == "top":
         fig.update_layout(margin=dict(b=30, t=60, l=60, r=20))
         fig.add_annotation(text=f"© {short_text}", xref="paper", yref="paper", x=0.99, y=0.96,
@@ -147,10 +147,8 @@ if page == "page_about":
     # Texto principal
     st.markdown("""
     <div class='body-text'>
-    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo da última década.<br><br>
-    
-    Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.<br><br>
-    
+    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo da última década.<br>
+    Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.<br>
     Este painel tem como missão evidenciar a desigualdade de oportunidades e de postos de trabalho no mercado de festivais, com olhar atento às mulheres que fazem da música e do palco sua profissão. Concebido como um projeto vivo, este espaço de consulta para pesquisas e profissionais do mercado é expandido gradualmente, integrando novos festivais à medida que consolidam sua trajetória e amostragem no cenário nacional.
     </div>
     """, unsafe_allow_html=True)
@@ -298,7 +296,7 @@ elif page == "page_history":
         plot_bgcolor='white', paper_bgcolor='white'
     )
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
     st.plotly_chart(fig, use_container_width=True)
 
 # --- PÁGINA 4: PANORAMA ANUAL ---
@@ -492,7 +490,7 @@ elif page == "page_festival":
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc")
     
   
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': True})
     
     st.divider()
@@ -617,7 +615,7 @@ elif page == "page_geo":
         fig.update_traces(marker=dict(line=dict(width=1, color='white')))
         fig.update_layout(height=350, xaxis_tickangle=-30, plot_bgcolor='white')
         fig.add_hline(y=50, line_dash="dot", line_color="#666", opacity=0.4)
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
         st.plotly_chart(fig, use_container_width=True)
     
     with ct:
@@ -671,7 +669,7 @@ elif page == "page_artists":
         fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
                           legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
     
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
         st.plotly_chart(fig, use_container_width=True)
 
     with t2:
@@ -722,7 +720,7 @@ elif page == "page_artists":
                                              hovertemplate=f'{f_name}: %{{y}}<extra></extra>'))
             
             fig_g.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_g = add_source(fig_g, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+            fig_g = add_source(fig_g, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_g, use_container_width=True)
         else:
             st.info("Sem grupos catalogados para este ano.")
@@ -856,7 +854,7 @@ elif page == "page_comparator":
     )
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc", annotation_text="paridade")
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("### Situação na edição mais recente")
