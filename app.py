@@ -132,7 +132,7 @@ with st.sidebar:
     button_html = """
     <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
             data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
-            data-emoji="☕" data-font="Cookie" data-text="Apoiar pesquisa" data-outline-color="#ffffff" 
+            data-emoji="☕" data-font="Cookie" data-text="Buy Me a Coffee" data-outline-color="#ffffff" 
             data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
     """
     
@@ -298,7 +298,7 @@ elif page == "page_history":
         plot_bgcolor='white', paper_bgcolor='white'
     )
     
-    fig = add_source(fig, "Lima Arruda, 2016-2024", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True)
 
 # --- PÁGINA 4: PANORAMA ANUAL ---
@@ -491,7 +491,7 @@ elif page == "page_festival":
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc")
     
   
-    fig = add_source(fig, "Arruda, 2016-2024", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': True})
     
     st.divider()
@@ -616,7 +616,7 @@ elif page == "page_geo":
         fig.update_traces(marker=dict(line=dict(width=1, color='white')))
         fig.update_layout(height=350, xaxis_tickangle=-30, plot_bgcolor='white')
         fig.add_hline(y=50, line_dash="dot", line_color="#666", opacity=0.4)
-        fig = add_source(fig, "Arruda, 2016-2024", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
     
     with ct:
@@ -659,7 +659,7 @@ elif page == "page_artists":
         fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
                           legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
         
-        fig = add_source(fig, "Arruda, 2016-2024", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
 
     with t2:
@@ -696,7 +696,7 @@ elif page == "page_artists":
                                              line=dict(color=CORES_GEN.get(f_name), width=3),
                                              hovertemplate=f'{f_name}: %{{y}}<extra></extra>'))
             fig_g.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_g = add_source(fig_g, "Arruda, 2016-2024", "top")
+            fig_g = add_source(fig_g, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
             st.plotly_chart(fig_g, use_container_width=True)
         else:
             st.info("Sem grupos catalogados para este ano.")
@@ -744,7 +744,7 @@ elif page == "page_artists":
                                              line=dict(color=CORES_GEN.get(g_name), width=3),
                                              hovertemplate=f'{g_name}: %{{y}}<extra></extra>'))
             fig_s.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_s = add_source(fig_s, "Arruda, 2016-2024", "top")
+            fig_s = add_source(fig_s, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
             st.plotly_chart(fig_s, use_container_width=True)
         else:
             st.info("Sem solistas catalogados para este ano.")
@@ -761,7 +761,7 @@ elif page == "page_artists":
                          color='Festival', color_continuous_scale='Blues')
             fig_r.update_layout(height=450, yaxis=dict(autorange="reversed"), coloraxis_showscale=False)
             fig_r.update_xaxes(dtick=1)
-            fig_r = add_source(fig_r, "Arruda, 2016-2024", "bottom")
+            fig_r = add_source(fig_r, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_r, use_container_width=True)
         else:
             st.info("Nenhum artista com múltiplas aparições em festivais diferentes neste ano.")
@@ -816,7 +816,7 @@ elif page == "page_comparator":
     )
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc", annotation_text="paridade")
     
-    fig = add_source(fig, "Arruda, 2016-2024", "top")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("### Situação na edição mais recente")
@@ -873,7 +873,7 @@ elif page == "page_heatmap":
         plot_bgcolor='white', paper_bgcolor='white',
         margin=dict(l=150, r=20, t=50, b=40)
     )
-    fig = add_source(fig, "Arruda, 2016-2024", "bottom")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
     st.plotly_chart(fig, use_container_width=True)
     
     st.caption("Intensidade do roxo indica proximidade da paridade (50%). Células vazias = dados ausentes.")
@@ -882,7 +882,7 @@ st.markdown("<hr style='margin: 2rem 0 1rem; opacity: 0.3;'>", unsafe_allow_html
 st.markdown(f"""
 <div style='text-align: center; color: #666; font-size: 0.75rem; line-height: 1.6;'>
     {SOURCE_LONG}<br>
-    Thabata Lima Arruda · mulheresnosfestivais@proton.me<br>
+    Thabata Lima Arruda, 2026 · mulheresnosfestivais@proton.me<br>
     Última atualização de dados: {datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC")} </br>
     Uso livre para fins informativos e de pesquisa, mediante citação obrigatória de fonte e autoria. <br>
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt">CC BY-NC-SA 4.0</a>
