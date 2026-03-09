@@ -472,7 +472,7 @@ elif page == "page_festival":
     
     st.markdown(f"**Evolução da presença feminina: {fest}**")
     fig = px.line(evo, x='Ano', y='% Mulheres', markers=True)
-    fig.update_traces(line=dict(color='#000', width=3), marker=dict(size=10, color='#000'))
+    fig.update_traces(line=dict(color='#7B2CBF', width=3), marker=dict(size=10, color='#000'))
     
     
     fig.update_xaxes(
