@@ -431,7 +431,7 @@ elif page == "page_festival":
 
     st.markdown(f"<div class='section-title'>{TABS[4]}</div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='section-subtitle'>Raio-X detalhado por edição</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-subtitle'>Dados detalhados por festival/edição</div>", unsafe_allow_html=True)
     
    
     st.markdown("""
@@ -472,7 +472,7 @@ elif page == "page_festival":
     
     st.markdown(f"**Evolução da presença feminina: {fest}**")
     fig = px.line(evo, x='Ano', y='% Mulheres', markers=True)
-    fig.update_traces(line=dict(color='#7B2CBF', width=3), marker=dict(size=10, color='#000'))
+    fig.update_traces(line=dict(color='#7B2CBF', width=3), marker=dict(size=10, color='#7B2CBF'))
     
     
     fig.update_xaxes(
