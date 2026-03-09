@@ -585,7 +585,7 @@ elif page == "page_festival":
             </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("<div style='margin-top: 30px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
 
 
 elif page == "page_geo":
