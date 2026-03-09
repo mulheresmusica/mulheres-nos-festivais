@@ -653,7 +653,11 @@ elif page == "page_artists":
 
     with t1:
         st.markdown("### Formações")
-        st.caption("Performances ao vivo: artistas solo vs. formações coletivas (duos, trios, bandas e grupos).")
+        st.info("""
+            Percentual dos atos musicais por tipo de formação.<br>
+            **Banda/Duo:** grupos com 2 ou mais integrantes. **Solistas:** artistas que se apresentam individualmente, sem formação fixa com outros integrantes.
+
+        """)
     
         da_pie = da.copy()
         da_pie['Tipo_Simplificado'] = da_pie['Tipo'].apply(lambda x: 'Solista' if x == 'Solista' else 'Banda/Duo')
@@ -668,7 +672,7 @@ elif page == "page_artists":
         fig.update_layout(showlegend=True, height=400, margin=dict(t=20, b=50),
                           legend=dict(orientation="h", yanchor="bottom", y=-0.1, xanchor="center", x=0.5))
     
-        fig = add_source(fig, "Lima Arruda, 2026", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
 
     with t2:
