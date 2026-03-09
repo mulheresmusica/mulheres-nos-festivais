@@ -454,7 +454,7 @@ elif page == "page_festival":
                 border: 1px solid #eee; 
                 font-size: 0.85rem; 
                 color: #555;
-                margin-top: 20px;
+                margin-top: 23px;
             }
         </style>
     """, unsafe_allow_html=True)
