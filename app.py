@@ -722,7 +722,7 @@ elif page == "page_artists":
                                              hovertemplate=f'{f_name}: %{{y}}<extra></extra>'))
             
             fig_g.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_g = add_source(fig_g, "Lima Arruda, 2026", "top")
+            fig_g = add_source(fig_g, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
             st.plotly_chart(fig_g, use_container_width=True)
         else:
             st.info("Sem grupos catalogados para este ano.")
@@ -772,7 +772,7 @@ elif page == "page_artists":
                                              line=dict(color=CORES_GEN.get(g_name), width=3),
                                              hovertemplate=f'{g_name}: %{{y}}<extra></extra>'))
             fig_s.update_layout(height=350, hovermode='x unified', plot_bgcolor='white', xaxis=dict(dtick=1))
-            fig_s = add_source(fig_s, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+            fig_s = add_source(fig_s, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_s, use_container_width=True)
         else:
             st.info("Sem solistas catalogados para este ano.")
@@ -799,7 +799,7 @@ elif page == "page_artists":
                 plot_bgcolor='white'
             )
             fig_r.update_xaxes(dtick=1, gridcolor='#eee')
-            fig_r = add_source(fig_r, "Lima Arruda, 2026", "bottom")
+            fig_r = add_source(fig_r, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_r, use_container_width=True)
         else:
             st.info("Nenhum artista com múltiplas aparições em festivais diferentes neste ano.")
