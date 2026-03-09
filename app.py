@@ -777,13 +777,20 @@ elif page == "page_artists":
         rec = rec[rec['Festival'] >= 2].sort_values('Festival', ascending=False).head(15)
         
         if len(rec) > 0:
-            # --- NOVA ESCALA DE COR: Amarelo/Verde Água (Tealrose) ---
+            # --- ESCALA MONOCROMÁTICA NEUTRA (Grey-Slate) ---
             fig_r = px.bar(rec, x='Festival', y='Artista', orientation='h', 
                          color='Festival', 
-                         color_continuous_scale='Tealrose') # Escala que foge do azul/roxo
+                         # 'Greys' ou 'Slate' são ótimos. 'Blues' você disse que confunde, 
+                         # então vamos de 'Greys' ou uma escala personalizada:
+                         color_continuous_scale=['#CED4DA', '#6C757D', '#343A40']) 
             
-            fig_r.update_layout(height=450, yaxis=dict(autorange="reversed"), coloraxis_showscale=False)
-            fig_r.update_xaxes(dtick=1)
+            fig_r.update_layout(
+                height=450, 
+                yaxis=dict(autorange="reversed"), 
+                coloraxis_showscale=False,
+                plot_bgcolor='white'
+            )
+            fig_r.update_xaxes(dtick=1, gridcolor='#eee')
             fig_r = add_source(fig_r, "Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_r, use_container_width=True)
         else:
