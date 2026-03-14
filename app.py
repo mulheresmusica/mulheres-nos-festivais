@@ -131,10 +131,6 @@ with st.sidebar:
     for k, lab in zip(keys, TABS):
         btn_type = "primary" if st.session_state['page'] == k else "secondary"
         if st.button(lab, use_container_width=True, type=btn_type): st.session_state['page'] = k; st.rerun()
-
-    with st.sidebar:
-    # ... seu título e menu ...
-
     # --- BLOCO DE MÉTRICAS GERAIS (ACUMULADO HISTÓRICO) ---
     st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
     
