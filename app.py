@@ -891,24 +891,25 @@ elif page == "page_heatmap":
         x=[str(int(c)) for c in pv.columns],
         y=pv.index,
         colorscale=[
-            [0.0, '#F2F0F7'],   # Roxo acinzentado muito claro (quase branco)
-            [0.25, '#D1C4E9'],  # Lavanda suave
-            [0.5, '#9D4EDD'],   # Roxo médio vibrante
-            [0.75, '#7B2CBF'],  # O seu ROXO PRINCIPAL (Mulheres)
-            [1.0, '#3D2B56']    # Roxo bem fechado (para o 100% de paridade)
+            [0.0, '#F2F0F7'], # Roxo clarinho
+            [0.25, '#D1C4E9'], 
+            [0.5, '#9D4EDD'], 
+            [0.75, '#7B2CBF'], # Roxo principal
+            [1.0, '#3D2B56']  # Roxo fechado
         ],
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
         hovertemplate="%{y}<br>Ano: %{x}<br>Mulheres: %{z:.1f}%<extra></extra>",
         text=[[f"{v:.0f}" if pd.notna(v) else "" for v in r] for r in pv.values],
         texttemplate="%{text}",
-        textfont={"size": 8, "color": "#444"}
+        # --- AJUSTE DE FONTE AQUI ---
+        textfont={"size": 11}, # Aumentado de 8 para 11
     ))
     
     fig.update_layout(
-        height=max(500, len(pv) * 28),
-        yaxis=dict(autorange="reversed", tickfont_size=10),
-        xaxis=dict(tickfont_size=10),
+        height=max(500, len(pv) * 35), # Aumentei um pouco a altura por linha para caber o número maior
+        yaxis=dict(autorange="reversed", tickfont_size=12),
+        xaxis=dict(tickfont_size=12),
         plot_bgcolor='white', paper_bgcolor='white',
         margin=dict(l=150, r=20, t=50, b=40)
     )
