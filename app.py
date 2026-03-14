@@ -201,7 +201,7 @@ if page == "page_about":
     st.markdown("**Autoria**")
     st.markdown("""
     <div class='body-text' style='margin-bottom: 1.5rem;'>
-    Todos os dados são coletados, organizados e analisados pela pesquisadora musical <b>Thabata Lima Arruda</b> desde 2018.
+    Todos os dados são coletados, organizados e analisados pela pesquisadora musical <b>Thabata Lima Arruda</b>.
     </div>
     """, unsafe_allow_html=True)
     
