@@ -168,7 +168,7 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
     
-    
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     
     # Código para renderizar o botão oficial do Buy Me a Coffee
     button_html = """
