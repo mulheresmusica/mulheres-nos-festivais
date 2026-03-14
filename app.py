@@ -89,7 +89,7 @@ def carregar_dados():
     except Exception as e:
         return pd.DataFrame(), "Data não disponível"
 
-df = carregar_dados()
+df, data_planilha = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
 
 def formacao(row):
