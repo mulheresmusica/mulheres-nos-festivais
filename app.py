@@ -790,7 +790,7 @@ elif page == "page_artists":
         
         if len(rec) > 0:
             # --- ESCALA MONOCROMÁTICA NEUTRA (Grey-Slate) ---
-            fig_r = px.bar(rec, x='Quantidade de festivais', y='Artista', orientation='h', 
+            fig_r = px.bar(rec, x='Festival', y='Artista', orientation='h', 
                          color='Festival', 
                          # 'Greys' ou 'Slate' são ótimos. 'Blues' você disse que confunde, 
                          # então vamos de 'Greys' ou uma escala personalizada:
@@ -802,7 +802,11 @@ elif page == "page_artists":
                 coloraxis_showscale=False,
                 plot_bgcolor='white'
             )
-            fig_r.update_xaxes(dtick=1, gridcolor='#eee')
+            fig_r.update_xaxes(
+                title="Quantidade de Festivais",
+                dtick=1, 
+                gridcolor='#eee'
+            )
             fig_r = add_source(fig_r, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
             st.plotly_chart(fig_r, use_container_width=True)
         else:
