@@ -85,6 +85,9 @@ def carregar_dados():
         df = df[df["Artista"] != "Não houve edição / Sem lineup"].copy()
         for c in ['Homens', 'Mulheres', 'Pessoas NB', 'Ano']: df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
         df['Ano'] = df['Ano'].astype(int)
+        df['Artista'] = df['Artista'].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
+        df['Ano'] = df['Ano'].astype(int)
+        
         return df, data_planilha
     except Exception as e:
         return pd.DataFrame(), "Data não disponível"
@@ -92,11 +95,7 @@ def carregar_dados():
 df, data_planilha = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
 
-df['Artista'] = df['Artista'].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
 
-        df['Ano'] = df['Ano'].astype(int)
-        
-        return df, data_planilha
 
 def formacao(row):
     h, m, nb = row.get('Homens', 0), row.get('Mulheres', 0), row.get('Pessoas NB', 0)
