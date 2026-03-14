@@ -152,9 +152,8 @@ with st.sidebar:
             <b>Base de Dados Histórica:</b><br>
             • {total_festivais} festivais analisados<br>
             • {total_atos} atos musicais catalogados<br>
-            • {integrantes_fmt} integrantes individuais mapeados
-
-            Última atualização de dados: {data_planilha} </br>
+            • {integrantes_fmt} integrantes individuais mapeados<br>
+            Última atualização de dados: {data_planilha}
         </div>
     """, unsafe_allow_html=True)
 
