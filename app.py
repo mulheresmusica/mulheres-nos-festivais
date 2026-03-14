@@ -891,7 +891,7 @@ elif page == "page_heatmap":
     h['Pct'] = (h['Mulheres'] / h['Total'] * 100).round(1)
     h = h.reset_index()
     
-    pv = h.pivot(index='Festival', columns='Ano', values='Pct')
+    pv = h.pivot(index='Quantidade de festivais', columns='Ano', values='Pct')
     
     fig = go.Figure(data=go.Heatmap(
         z=pv.values,
