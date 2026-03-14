@@ -903,7 +903,7 @@ elif page == "page_heatmap":
         text=[[f"{v:.0f}" if pd.notna(v) else "" for v in r] for r in pv.values],
         texttemplate="%{text}",
         # --- AJUSTE DE FONTE AQUI ---
-        textfont={"size": 11}, # Aumentado de 8 para 11
+        textfont={"size": 9}, # Aumentado de 8 para 11
     ))
     
     fig.update_layout(
