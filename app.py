@@ -92,6 +92,12 @@ def carregar_dados():
 df, data_planilha = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
 
+df['Artista'] = df['Artista'].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
+
+        df['Ano'] = df['Ano'].astype(int)
+        
+        return df, data_planilha
+
 def formacao(row):
     h, m, nb = row.get('Homens', 0), row.get('Mulheres', 0), row.get('Pessoas NB', 0)
     mt = str(row.get('Mista?', '')).lower()
