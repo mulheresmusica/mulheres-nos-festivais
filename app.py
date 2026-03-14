@@ -891,12 +891,12 @@ elif page == "page_heatmap":
         x=[str(int(c)) for c in pv.columns],
         y=pv.index,
         colorscale=[
-            [0.0, '#F8F6FA'],
-            [0.25, '#E8E0F0'],
-            [0.5, '#C8B8D8'],
-            [0.75, '#A080B8'],
-            [1.0, '#704080']
-        ],
+            [0.0, '#F2F0F7'],   # Roxo acinzentado muito claro (quase branco)
+            [0.25, '#D1C4E9'],  # Lavanda suave
+            [0.5, '#9D4EDD'],   # Roxo médio vibrante
+            [0.75, '#7B2CBF'],  # O seu ROXO PRINCIPAL (Mulheres)
+            [1.0, '#3D2B56']    # Roxo bem fechado (para o 100% de paridade)
+    ]
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
         hovertemplate="%{y}<br>Ano: %{x}<br>Mulheres: %{z:.1f}%<extra></extra>",
