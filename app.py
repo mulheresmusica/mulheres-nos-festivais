@@ -907,9 +907,9 @@ elif page == "page_heatmap":
     ))
     
     fig.update_layout(
-        height=max(500, len(pv) * 35), # Aumentei um pouco a altura por linha para caber o número maior
-        yaxis=dict(autorange="reversed", tickfont_size=12),
-        xaxis=dict(tickfont_size=12),
+        height=max(500, len(pv) * 28), # Aumentei um pouco a altura por linha para caber o número maior
+        yaxis=dict(autorange="reversed", tickfont_size=11),
+        xaxis=dict(tickfont_size=11),
         plot_bgcolor='white', paper_bgcolor='white',
         margin=dict(l=150, r=20, t=50, b=40)
     )
