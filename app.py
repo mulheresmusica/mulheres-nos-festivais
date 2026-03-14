@@ -913,7 +913,7 @@ elif page == "page_heatmap":
         margin=dict(l=150, r=20, t=50, b=30)
     )
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+    fig = add_source(fig, "Lima Arruda, 2026", "bottom")
     st.plotly_chart(fig, use_container_width=True)
     
     st.caption("Intensidade do roxo indica proximidade da paridade (50%). Células vazias = dados ausentes.")
