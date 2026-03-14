@@ -126,38 +126,49 @@ TABS = ["Sobre o Projeto", "Metodologia", "Evolução Histórica", "Panorama Anu
 SOURCE_LONG = "Mulheres nos Festivais: quem ocupa os palcos brasileiros?"
 
 with st.sidebar:
+    # 1. Cabeçalho e Títulos
     st.markdown(f"<div class='sidebar-tag'>Painel de Dados</div><div class='sidebar-title'>Mulheres nos Festivais</div><div class='sidebar-subtitle'>Quem ocupa os palcos brasileiros?<br>2016 — 2026</div>", unsafe_allow_html=True)
+    
+    # 2. Menu de Navegação
     keys = ["page_about", "page_methodology", "page_history", "page_annual", "page_festival", "page_geo", "page_artists", "page_comparator", "page_heatmap"]
     for k, lab in zip(keys, TABS):
         btn_type = "primary" if st.session_state['page'] == k else "secondary"
-        if st.button(lab, use_container_width=True, type=btn_type): st.session_state['page'] = k; st.rerun()
-    # --- BLOCO DE MÉTRICAS GERAIS (ACUMULADO HISTÓRICO) ---
-    st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
-    
-    # Calculando os totais históricos
+        if st.button(lab, use_container_width=True, type=btn_type): 
+            st.session_state['page'] = k
+            st.rerun()
+            
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+
+    # 3. Bloco de Métricas (Estilo Texto de Licença)
     total_festivais = df['Festival'].nunique()
     total_atos = len(df)
     total_integrantes = int(df[['Homens', 'Mulheres', 'Pessoas NB']].sum().sum())
-
-    # Exibindo na Sidebar com colunas para economizar espaço
-    col1, col2 = st.columns(2)
-    col1.metric("Festivais", f"{total_festivais}")
-    col2.metric("Atos", f"{total_atos}")
-    st.metric("Integrantes Catalogados", f"{total_integrantes:,}".replace(',', '.'))
-
-    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     
-    # --- TEXTO DE LICENÇA E AVISO ---
+    # Formatando o número de integrantes com ponto (ex: 12.345)
+    integrantes_fmt = f"{total_integrantes:,}".replace(',', '.')
+
     st.markdown(f"""
-        <div style='font-size: 0.8rem; color: #666;'>
-            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
-            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt'>CC BY-NC-SA 4.0</a><br><br>
-            <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
+        <div style='font-size: 0.8rem; color: #666; line-height: 1.6;'>
+            <b>Base de Dados Histórica:</b><br>
+            • {total_festivais} festivais analisados<br>
+            • {total_atos} atos musicais catalogados<br>
+            • {integrantes_fmt} integrantes individuais mapeados
         </div>
     """, unsafe_allow_html=True)
+
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
-    st.caption("A democratização destes dados é parte fundamental deste projeto. Você pode compartilhar, copiar e redistribuir este conteúdo em qualquer suporte ou formato, desde que atribua o crédito apropriadamente à autora e indique o link desta plataforma. — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)")
-    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+
+    # 4. Texto de Licença e Aviso Final
+    st.markdown(f"""
+        <div style='font-size: 0.8rem; color: #666; line-height: 1.4;'>
+            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
+            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
+            <br><br>
+            ⚠️ <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    
     
     # Código para renderizar o botão oficial do Buy Me a Coffee
     button_html = """
