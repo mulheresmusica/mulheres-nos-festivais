@@ -147,7 +147,7 @@ if page == "page_about":
     # Texto principal
     st.markdown("""
     <div class='body-text'>
-    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo da última década. Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.<br><br> 
+    Coletar, sistematizar e disseminar dados que exponham as lacunas e desigualdades históricas na indústria musical, especialmente nos palcos dos principais festivais brasileiros, tem sido o foco deste estudo ao longo dos últimos anos. Embora existam avanços, a disparidade de gênero continua sendo uma realidade latente. Isso reforça a urgência de ações efetivas e, sobretudo, consistentes, para que um cenário musical brasileiro verdadeiramente inclusivo se consolide.<br><br> 
     Este painel tem como missão evidenciar a desigualdade de oportunidades e de postos de trabalho no mercado de festivais, com olhar atento às mulheres que fazem da música e do palco sua profissão. Concebido como um projeto vivo, este espaço de consulta para pesquisas e profissionais do mercado é expandido gradualmente, integrando novos festivais à medida que consolidam sua trajetória e amostragem no cenário nacional.
     </div>
     """, unsafe_allow_html=True)
@@ -158,7 +158,7 @@ if page == "page_about":
     st.markdown("**Autoria**")
     st.markdown("""
     <div class='body-text' style='margin-bottom: 1.5rem;'>
-    Todos os dados foram coletados e organizados pela pesquisadora musical <b>Thabata Lima Arruda</b>.
+    Todos os dados são coletados, organizados e analisados pela pesquisadora musical <b>Thabata Lima Arruda</b> desde 2018.
     </div>
     """, unsafe_allow_html=True)
     
@@ -176,7 +176,7 @@ if page == "page_about":
     # Contato
     st.markdown("**Contato**")
     st.markdown("mulheresnosfestivais@proton.me")
-    st.markdown("[thabata.work](https://thabata.work)")
+   # st.markdown("[thabata.work](https://thabata.work)")
         
 
 elif page == "page_methodology":
@@ -190,7 +190,7 @@ elif page == "page_methodology":
 
         Vale destacar que alguns festivais deixaram de acontecer, especialmente após a pandemia, enquanto outros já apresentavam edições irregulares antes desse período. O número de festivais analisados anualmente seguiu uma média ajustada, levando em conta tanto os cancelamentos quanto a inclusão de novos eventos. Essa abordagem busca garantir uma avaliação equilibrada das tendências de participação feminina ao longo do tempo.<br><br>
 
-        A expansão da base de dados (tanto festivais, quanto artistas) ocorre de forma incremental. Atualmente, novos eventos estão sendo catalogados e inseridos gradualmente, priorizando festivais que consolidam o critério metodológico de ao menos quatro edições realizadas.
+        A expansão da base de dados ocorre de forma incremental. Atualmente, novos eventos - e artistas - estão sendo catalogados e inseridos gradualmente, priorizando festivais que consolidam o critério metodológico de ao menos quatro edições realizadas.
         </div>
         """, unsafe_allow_html=True)
     
@@ -232,7 +232,7 @@ elif page == "page_methodology":
         <div class='body-text'>
         Além da categorização dos atos musicais, também foi realizada a categorização dos <b>integrantes individuais</b> de cada ato musical. Essa abordagem metodológica foi essencial para aprofundar a análise sobre a disparidade de gênero nos festivais, uma vez que os integrantes de cada grupo foram contabilizados individualmente.<br><br>
 
-        Consideram-se integrantes individuais quem é parte de duos, grupos ou bandas, excluindo artistas contratados apenas para apresentações pontuais ou turnês temporárias, bem como profissionais não-músicos, como produtores ou dançarinos. As fontes para identificar os integrantes incluem sites oficiais, redes sociais, fotos promocionais e matérias jornalísticas, e foram consultadas de acordo com o ano de cada festival, levando em consideração que as formações dos grupos/bandas podem mudar ao longo do tempo.<br><br>
+        Consideram-se integrantes individuais: solistas e quem é parte de duos, grupos ou bandas, excluindo artistas contratados apenas para apresentações pontuais ou turnês temporárias, bem como profissionais não-músicos, como produtores ou dançarinos. As fontes para identificar os integrantes incluem sites oficiais, redes sociais, fotos promocionais e matérias jornalísticas, e foram consultadas de acordo com o ano de cada festival, levando em consideração que as formações dos grupos/bandas podem mudar ao longo do tempo.<br><br>
 
         A classificação dos integrantes seguiu três categorias:
         <ul>
@@ -295,7 +295,7 @@ elif page == "page_history":
         plot_bgcolor='white', paper_bgcolor='white'
     )
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True)
 
 # --- PÁGINA 4: PANORAMA ANUAL ---
@@ -360,8 +360,8 @@ elif page == "page_annual":
             """, unsafe_allow_html=True)
 
         c1, c2, c3, c4, c5 = st.columns(5)
-        draw_card(c1, "Atos Musicais", f"{total_atos}", "Projetos no ano")
-        draw_card(c2, "Total Integrantes", f"{total_ints}", "Pessoas no palco")
+        draw_card(c1, "Atos Musicais", f"{total_atos}", "Apresentações")
+        draw_card(c2, "Total Integrantes", f"{total_ints}", "Pessoas")
         
         pm = (soma_m / total_ints * 100) if total_ints > 0 else 0
         ph = (soma_h / total_ints * 100) if total_ints > 0 else 0
@@ -376,7 +376,7 @@ elif page == "page_annual":
       
         if soma_trans > 0:
             st.info(f"""
-                **Diversidade Trans:** identificamos a presença de **{soma_trans}** pessoas autodeclaradas trans nos palcos de {ano}. 
+                **Dado Extra:** identificamos a presença de **{soma_trans}** pessoas autodeclaradas trans nos palcos de {ano}. 
                 Isso representa **{pct_trans:.1f}%** do total de **{total_ints}** integrantes individuais analisados neste ano.
             """)
         else:
@@ -385,7 +385,7 @@ elif page == "page_annual":
         st.divider()
         
         # --- 4. RANKING DE REPRESENTATIVIDADE ---
-        st.markdown("**Ranking de representatividade (Mulheres + Não-binárias)**")
+        st.markdown("**Ranking de representatividade (Mulheres + Pessoas não-binárias)**")
         
         r = d.groupby('Festival')[['Mulheres', 'Homens', 'Pessoas NB']].sum()
         r['Total'] = r.sum(axis=1)
@@ -489,7 +489,7 @@ elif page == "page_festival":
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc")
     
   
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': True})
     
     st.divider()
@@ -545,7 +545,7 @@ elif page == "page_festival":
         """, unsafe_allow_html=True)
 
     c1, c2, c3, c4 = st.columns(4)
-    draw_fest_card(c1, "Atos Musicais", f"{total_atos}", f"{total_pess} pessoas")
+    draw_fest_card(c1, "Atos Musicais", f"{total_atos}", f"{total_pess} integrantes individuais")
     
     pm = (s_m / total_pess * 100) if total_pess > 0 else 0
     ph = (s_h / total_pess * 100) if total_pess > 0 else 0
@@ -614,7 +614,7 @@ elif page == "page_geo":
         fig.update_traces(marker=dict(line=dict(width=1, color='white')))
         fig.update_layout(height=350, xaxis_tickangle=-30, plot_bgcolor='white')
         fig.add_hline(y=50, line_dash="dot", line_color="#666", opacity=0.4)
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
     
     with ct:
@@ -853,7 +853,7 @@ elif page == "page_comparator":
     )
     fig.add_hline(y=50, line_dash="dot", line_color="#ccc", annotation_text="paridade")
     
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("### Situação na edição mais recente")
@@ -891,9 +891,11 @@ elif page == "page_heatmap":
         x=[str(int(c)) for c in pv.columns],
         y=pv.index,
         colorscale=[
-            [0.0, '#F2F0F7'], # Roxo clarinho
-            [0.5, '#9D4EDD'], # Roxo médio
-            [1.0, '#7B2CBF']  # Roxo vibrante (Mulheres)
+            [0.0, '#F8F6FA'],
+            [0.25, '#E8E0F0'],
+            [0.5, '#C8B8D8'],
+            [0.75, '#A080B8'],
+            [1.0, '#704080']
         ],
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
