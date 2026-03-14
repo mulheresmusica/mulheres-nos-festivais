@@ -891,35 +891,28 @@ elif page == "page_heatmap":
         x=[str(int(c)) for c in pv.columns],
         y=pv.index,
         colorscale=[
-            [0.0, '#F2F0F7'], # Roxo clarinho
+            [0.0, '#F2F0F7'], 
             [0.25, '#D1C4E9'], 
             [0.5, '#9D4EDD'], 
-            [0.75, '#7B2CBF'], # Roxo principal
-            [1.0, '#3D2B56']  # Roxo fechado
+            [0.75, '#7B2CBF'], 
+            [1.0, '#3D2B56']  
         ],
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
         hovertemplate="%{y}<br>Ano: %{x}<br>Mulheres: %{z:.1f}%<extra></extra>",
         text=[[f"{v:.0f}" if pd.notna(v) else "" for v in r] for r in pv.values],
         texttemplate="%{text}",
-        # --- AJUSTE DE FONTE AQUI ---
-        textfont={"size": 11}, # Aumentado de 8 para 11
+        textfont={"size": 10}, 
     ))
     
     fig.update_layout(
-        height=max(500, len(pv) * 35), # Aumentei um pouco a altura por linha para caber o número maior
-        yaxis=dict(autorange="reversed", tickfont_size=12),
-        xaxis=dict(tickfont_size=12),
+        height=max(500, len(pv) * 28), 
+        yaxis=dict(autorange="reversed", tickfont_size=10),
+        xaxis=dict(tickfont_size=10),
         plot_bgcolor='white', paper_bgcolor='white',
         margin=dict(l=150, r=20, t=50, b=40)
     )
-
-    # --- TRUQUE DE CONTRASTE AUTOMÁTICO ---
-    # Isso faz o Plotly decidir se usa texto preto ou branco baseado na cor do fundo
-    fig.update_traces(textfont_color="white", selector=dict(type='heatmap')) 
-    # Se o 'white' forçar tudo para branco e ficar ruim no claro, use:
-    # fig.update_traces(textfont_variant="normal")
-    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+    fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
     st.plotly_chart(fig, use_container_width=True)
     
     st.caption("Intensidade do roxo indica proximidade da paridade (50%). Células vazias = dados ausentes.")
