@@ -153,7 +153,7 @@ with st.sidebar:
             • {total_festivais} festivais analisados<br>
             • {total_atos} atos musicais catalogados<br>
             • {integrantes_fmt} integrantes individuais mapeados<br>
-            Última atualização de dados: {data_planilha}
+            • Última atualização: {data_planilha}
         </div>
     """, unsafe_allow_html=True)
 
