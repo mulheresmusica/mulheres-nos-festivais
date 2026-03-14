@@ -153,6 +153,8 @@ with st.sidebar:
             • {total_festivais} festivais analisados<br>
             • {total_atos} atos musicais catalogados<br>
             • {integrantes_fmt} integrantes individuais mapeados
+
+            Última atualização de dados: {data_planilha} </br>
         </div>
     """, unsafe_allow_html=True)
 
@@ -164,7 +166,7 @@ with st.sidebar:
             A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
             — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
             <br><br>
-            ⚠️ <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
+            <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
         </div>
     """, unsafe_allow_html=True)
     
