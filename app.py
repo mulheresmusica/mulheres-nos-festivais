@@ -74,6 +74,9 @@ def carregar_dados():
         df_art = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=artistas")
         df_lin = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=lineups")
         df_fst = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=festivais")
+        url_data = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=config&range=A1:A1"
+        df_data = pd.read_csv(url_data)
+        data_planilha = df_data.columns[0] # Pega o valor da célula
         for d in [df_art, df_lin, df_fst]: d.columns = d.columns.str.strip()
         ca = "Nome do Artista" if "Nome do Artista" in df_art.columns else "Artista"
         d1 = pd.merge(df_lin, df_art, left_on="Artista", right_on=ca, how="left")
@@ -82,10 +85,9 @@ def carregar_dados():
         df = df[df["Artista"] != "Não houve edição / Sem lineup"].copy()
         for c in ['Homens', 'Mulheres', 'Pessoas NB', 'Ano']: df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
         df['Ano'] = df['Ano'].astype(int)
-        return df
+        return df, data_planilha
     except Exception as e:
-        st.error(f"Erro: {e}")
-        return pd.DataFrame()
+        return pd.DataFrame(), "Data não disponível"
 
 df = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
@@ -923,7 +925,7 @@ st.markdown(f"""
 <div style='text-align: center; color: #666; font-size: 0.75rem; line-height: 1.6;'>
     {SOURCE_LONG}<br>
     Thabata Lima Arruda, 2026 · mulheresnosfestivais@proton.me<br>
-    Última atualização de dados: {datetime.now(timezone.utc).strftime("%d/%m/%Y %H:%M UTC")} </br>
+    Última atualização de dados: {data_planilha} </br>
     Uso livre para fins informativos e de pesquisa, mediante citação obrigatória de fonte e autoria. <br>
 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt">CC BY-NC-SA 4.0</a>
 </div>
