@@ -906,11 +906,11 @@ elif page == "page_heatmap":
     ))
     
     fig.update_layout(
-        height=max(500, len(pv) * 30), 
+        height=max(500, len(pv) * 28), 
         yaxis=dict(autorange="reversed", tickfont_size=10),
         xaxis=dict(tickfont_size=10),
         plot_bgcolor='white', paper_bgcolor='white',
-        margin=dict(l=150, r=20, t=50, b=150)
+        margin=dict(l=150, r=20, t=50, b=30)
     )
     
     fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
