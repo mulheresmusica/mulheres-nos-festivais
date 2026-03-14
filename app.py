@@ -902,11 +902,11 @@ elif page == "page_heatmap":
         hovertemplate="%{y}<br>Ano: %{x}<br>Mulheres: %{z:.1f}%<extra></extra>",
         text=[[f"{v:.0f}" if pd.notna(v) else "" for v in r] for r in pv.values],
         texttemplate="%{text}",
-        textfont={"size": 11}, 
+        textfont={"size": 9}, 
     ))
     
     fig.update_layout(
-        height=max(500, len(pv) * 28), # Aumentei um pouco a altura por linha para caber o número maior
+        height=max(500, len(pv) * 25), # Aumentei um pouco a altura por linha para caber o número maior
         yaxis=dict(autorange="reversed", tickfont_size=10),
         xaxis=dict(tickfont_size=10),
         plot_bgcolor='white', paper_bgcolor='white',
