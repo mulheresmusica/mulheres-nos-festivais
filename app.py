@@ -115,7 +115,7 @@ def add_source(fig, short_text="Mulheres nos Festivais: quem ocupa os palcos bra
     return fig
 
 if 'page' not in st.session_state: st.session_state['page'] = 'page_about'
-TABS = ["Sobre o Projeto", "Metodologia", "Evolução Histórica", "Panorama Anual", "Visão por Festival", "Panorama Regional", "Panorama Artístico", "Comparador", "Heatmap Temporal"]
+TABS = ["Sobre o Projeto", "Metodologia", "Evolução Histórica", "Panorama Anual", "Visão por Festival", "Panorama Regional", "Panorama Atos Musicais", "Comparador", "Heatmap Temporal"]
 SOURCE_LONG = "Mulheres nos Festivais: quem ocupa os palcos brasileiros?"
 
 with st.sidebar:
