@@ -149,7 +149,7 @@ with st.sidebar:
 
     st.markdown(f"""
         <div style='font-size: 0.8rem; color: #666; line-height: 1.6;'>
-            <b>Base de Dados Histórica:</b><br>
+            <b>Base de dados:</b><br>
             • {total_festivais} festivais analisados<br>
             • {total_atos} atos musicais catalogados<br>
             • {integrantes_fmt} integrantes individuais mapeados<br>
