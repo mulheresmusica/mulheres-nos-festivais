@@ -910,17 +910,7 @@ elif page == "page_heatmap":
         yaxis=dict(autorange="reversed", tickfont_size=10),
         xaxis=dict(tickfont_size=10),
         plot_bgcolor='white', paper_bgcolor='white',
-        margin=dict(l=150, r=20, t=50, b=100)
-    )
-
-    fig.add_annotation(
-        text=f"© {SOURCE_LONG}",
-        xref="paper", yref="paper",
-        x=1, y=-0.35,  # O 'y' negativo empurra o texto para fora do gráfico
-        showarrow=False,
-        font=dict(size=9, color="#888"),
-        xanchor="right",
-        yanchor="top"
+        margin=dict(l=150, r=20, t=50, b=150)
     )
     
     fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
