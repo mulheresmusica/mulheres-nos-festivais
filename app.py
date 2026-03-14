@@ -916,7 +916,7 @@ elif page == "page_heatmap":
     fig.add_annotation(
         text=f"© {SOURCE_LONG}",
         xref="paper", yref="paper",
-        x=1, y=-0.15,  # O 'y' negativo empurra o texto para fora do gráfico
+        x=1, y=-0.35,  # O 'y' negativo empurra o texto para fora do gráfico
         showarrow=False,
         font=dict(size=9, color="#888"),
         xanchor="right",
