@@ -896,7 +896,7 @@ elif page == "page_heatmap":
             [0.5, '#9D4EDD'],   # Roxo médio vibrante
             [0.75, '#7B2CBF'],  # O seu ROXO PRINCIPAL (Mulheres)
             [1.0, '#3D2B56']    # Roxo bem fechado (para o 100% de paridade)
-        ]
+        ],
         zmin=0, zmax=50,
         colorbar=dict(title="%<br>Mulheres", ticksuffix="%"),
         hovertemplate="%{y}<br>Ano: %{x}<br>Mulheres: %{z:.1f}%<extra></extra>",
