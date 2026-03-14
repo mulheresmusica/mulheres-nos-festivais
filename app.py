@@ -131,6 +131,34 @@ with st.sidebar:
     for k, lab in zip(keys, TABS):
         btn_type = "primary" if st.session_state['page'] == k else "secondary"
         if st.button(lab, use_container_width=True, type=btn_type): st.session_state['page'] = k; st.rerun()
+
+    with st.sidebar:
+    # ... seu título e menu ...
+
+    # --- BLOCO DE MÉTRICAS GERAIS (ACUMULADO HISTÓRICO) ---
+    st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
+    
+    # Calculando os totais históricos
+    total_festivais = df['Festival'].nunique()
+    total_atos = len(df)
+    total_integrantes = int(df[['Homens', 'Mulheres', 'Pessoas NB']].sum().sum())
+
+    # Exibindo na Sidebar com colunas para economizar espaço
+    col1, col2 = st.columns(2)
+    col1.metric("Festivais", f"{total_festivais}")
+    col2.metric("Atos", f"{total_atos}")
+    st.metric("Integrantes Catalogados", f"{total_integrantes:,}".replace(',', '.'))
+
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+    
+    # --- TEXTO DE LICENÇA E AVISO ---
+    st.markdown(f"""
+        <div style='font-size: 0.8rem; color: #666;'>
+            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
+            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt'>CC BY-NC-SA 4.0</a><br><br>
+            <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
+        </div>
+    """, unsafe_allow_html=True)
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     st.caption("A democratização destes dados é parte fundamental deste projeto. Você pode compartilhar, copiar e redistribuir este conteúdo em qualquer suporte ou formato, desde que atribua o crédito apropriadamente à autora e indique o link desta plataforma. — [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt)")
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
