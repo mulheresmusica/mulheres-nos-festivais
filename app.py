@@ -240,7 +240,7 @@ with st.sidebar:
     total_atos = len(df)
     total_integrantes = int(df[['Homens', 'Mulheres', 'Pessoas NB']].sum().sum())
     
-    # Formatando o número de integrantes com ponto (ex: 12.345)
+    # Número de integrantes com ponto (ex: 12.345)
     integrantes_fmt = f"{total_integrantes:,}".replace(',', '.')
 
     st.markdown(f"""
@@ -267,7 +267,7 @@ with st.sidebar:
     
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     
-    # Código para renderizar o botão oficial do Buy Me a Coffee
+    # Botão oficial do Buy Me a Coffee
     button_html = """
     <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
             data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
@@ -753,7 +753,7 @@ elif page == "page_geo":
         fig.update_traces(marker=dict(line=dict(width=1, color='white')))
         fig.update_layout(height=350, xaxis_tickangle=-30, plot_bgcolor='white')
         fig.add_hline(y=50, line_dash="dot", line_color="#666", opacity=0.4)
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
         st.plotly_chart(fig, use_container_width=True)
     
     with ct:
