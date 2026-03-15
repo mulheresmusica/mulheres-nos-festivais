@@ -186,24 +186,37 @@ CORES_GEN = {
 def carregar_dados():
     SHEET_ID = "1Di4EgPDFPaRBjTxd3XrbO9MpDQ4oT-Xe_2g7WDnGyh8"
     try:
-        df_art = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{{SHEET_ID}}/gviz/tq?tqx=out:csv&sheet=artistas")
-        df_lin = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{{SHEET_ID}}/gviz/tq?tqx=out:csv&sheet=lineups")
-        df_fst = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{{SHEET_ID}}/gviz/tq?tqx=out:csv&sheet=festivais")
-        url_data = f"https://docs.google.com/spreadsheets/d/{{SHEET_ID}}/gviz/tq?tqx=out:csv&sheet=config&range=A1:A1"
-        df_data = pd.read_csv(url_data)
+        # URLs formatadas exatamente como no seu código original
+        df_art = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=artistas" )
+        df_lin = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=lineups" )
+        df_fst = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=festivais" )
+        url_config = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=config&range=A1:A1"
+        
+        df_data = pd.read_csv(url_config )
         data_planilha = df_data.columns[0]
-        for d in [df_art, df_lin, df_fst]: d.columns = d.columns.str.strip()
+        
+        for d in [df_art, df_lin, df_fst]: 
+            d.columns = d.columns.str.strip()
+            
         ca = "Nome do Artista" if "Nome do Artista" in df_art.columns else "Artista"
         d1 = pd.merge(df_lin, df_art, left_on="Artista", right_on=ca, how="left")
         cf = "Festivais" if "Festivais" in df_fst.columns else "Festival"
         df = pd.merge(d1, df_fst, left_on="Festival", right_on=cf, how="left")
+        
         df = df[df["Artista"] != "Não houve edição / Sem lineup"].copy()
-        for c in ['Homens', 'Mulheres', 'Pessoas NB', 'Ano']: df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
+        
+        for c in ['Homens', 'Mulheres', 'Pessoas NB', 'Ano']: 
+            df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
+            
         df['Ano'] = df['Ano'].astype(int)
         df['Artista'] = df['Artista'].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
+        
         return df, data_planilha
     except Exception as e:
+        # Se der erro, mostra o erro no Streamlit para sabermos o que é
+        st.error(f"Erro ao carregar: {e}")
         return pd.DataFrame(), "Data não disponível"
+
 
 df, data_planilha = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
