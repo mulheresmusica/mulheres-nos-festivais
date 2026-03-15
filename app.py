@@ -8,7 +8,6 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
-# Verifique se começou com st.markdown("""
 st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -24,7 +23,7 @@ st.markdown(f"""
         }}
         
         /* Botões Arredondados e Elegantes (Estilo Impact) */
-        div.stButton > button {{
+        div.stButton > button, div.stLinkButton > a {{
             border-radius: 50px !important;
             border: 1px solid #e0e0e0 !important;
             background-color: white !important;
@@ -35,12 +34,17 @@ st.markdown(f"""
             transition: all 0.2s ease !important;
             text-transform: none !important;
             width: 100%;
+            text-decoration: none !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }}
         
-        div.stButton > button:hover {{
+        div.stButton > button:hover, div.stLinkButton > a:hover {{
             border-color: #7B2CBF !important;
             color: #7B2CBF !important;
             background-color: #fcfaff !important;
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.08) !important;
         }}
         
         div.stButton > button[kind="primary"] {{
@@ -49,14 +53,6 @@ st.markdown(f"""
             border: 1px solid #1a1a1a !important;
         }}
 
-        /* Seletor de Idioma Discreto */
-        .lang-btn-container {{
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-            justify-content: flex-start;
-        }}
-        
         /* Sidebar */
         [data-testid="stSidebar"] {{
             background-color: #fcfcfc;
@@ -156,14 +152,14 @@ st.markdown(f"""
         footer {{visibility: hidden;}}
     </style>
 """, unsafe_allow_html=True)
-# --- LEI DE CORES PADRONIZADA ---
+
 # --- LEI DE CORES PADRONIZADA ---
 CORES_GEN = {
-    'Homens': '#0077B6',
-    'Mulheres': '#7B2CBF',
-    'Não-binários': '#FF8500',
-    'Pessoas NB': '#FF8500',
-    'Misto': '#2D6A4F',
+    'Homens': '#0077B6',      # Azul Vibrante
+    'Mulheres': '#7B2CBF',    # Roxo Vibrante
+    'Não-binários': '#FF8500', # Laranja Brilhante
+    'Pessoas NB': '#FF8500',  # Variante para NB
+    'Misto': '#2D6A4F',       # Verde
     'Indeterminado': '#888888'
 }
 
@@ -174,9 +170,9 @@ def carregar_dados():
         df_art = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=artistas")
         df_lin = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=lineups")
         df_fst = pd.read_csv(f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=festivais")
-        url_config = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=config&range=A1:A1"
-        df_data = pd.read_csv(url_config)
-        data_planilha = df_data.columns[0]
+        url_data = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=config&range=A1:A1"
+        df_data = pd.read_csv(url_data)
+        data_planilha = df_data.columns[0] # Pega o valor da célula
         for d in [df_art, df_lin, df_fst]: d.columns = d.columns.str.strip()
         ca = "Nome do Artista" if "Nome do Artista" in df_art.columns else "Artista"
         d1 = pd.merge(df_lin, df_art, left_on="Artista", right_on=ca, how="left")
@@ -186,19 +182,22 @@ def carregar_dados():
         for c in ['Homens', 'Mulheres', 'Pessoas NB', 'Ano']: df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
         df['Ano'] = df['Ano'].astype(int)
         df['Artista'] = df['Artista'].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
+        df['Ano'] = df['Ano'].astype(int)
+        
         return df, data_planilha
     except Exception as e:
-        st.error(f"Erro ao carregar dados: {e}")
         return pd.DataFrame(), "Data não disponível"
 
 df, data_planilha = carregar_dados()
 if df.empty: st.warning("Aguardando dados..."); st.stop()
 
+
+
 def formacao(row):
     h, m, nb = row.get('Homens', 0), row.get('Mulheres', 0), row.get('Pessoas NB', 0)
     mt = str(row.get('Mista?', '')).lower()
-    t_sum = h + m + nb
-    if t_sum == 0: return 'Indeterminado'
+    t = h + m + nb
+    if t == 0: return 'Indeterminado'
     if nb > 0 and h == 0 and m == 0: return 'Não-binário'
     if mt == 'sim' or (m > 0 and h > 0) or (m > 0 and nb > 0) or (h > 0 and nb > 0): return 'Misto'
     if m > 0 and h == 0 and nb == 0: return 'Mulheres'
@@ -207,66 +206,74 @@ def formacao(row):
 
 df['Formacao'] = df.apply(formacao, axis=1)
 
-def add_source(fig, short_text=f"{t['sidebar_title']}: {t['sidebar_subtitle'].replace('<br>', ' ')}", position="bottom"):
-    fig.update_layout(
-        font=dict(family="Inter", size=10),
-        margin=dict(b=40, t=40, l=40, r=20),
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)'
-    )
-    fig.add_annotation(text=f"© {short_text}", xref="paper", yref="paper", x=1, y=-0.15,
-                      showarrow=False, font=dict(size=8, color="#888"), xanchor="right", yanchor="top")
+def add_source(fig, short_text="Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", position="bottom"):
+    if position == "top":
+        fig.update_layout(margin=dict(b=30, t=60, l=60, r=20))
+        fig.add_annotation(text=f"© {short_text}", xref="paper", yref="paper", x=0.99, y=0.96,
+                          showarrow=False, font=dict(size=8, color="#888"), xanchor="right", yanchor="top")
+    else:
+        fig.update_layout(margin=dict(b=25, t=50, l=60, r=20))
+        fig.add_annotation(text=f"© {short_text}", xref="paper", yref="paper", x=0.99, y=0.01,
+                          showarrow=False, font=dict(size=7, color="#777"), xanchor="right", yanchor="bottom")
     return fig
 
-# --- SIDEBAR ---
 if 'page' not in st.session_state: st.session_state['page'] = 'page_about'
+TABS = ["Sobre o Projeto", "Metodologia", "Evolução Histórica", "Panorama Anual", "Visão por Festival", "Panorama Regional", "Panorama Atos Musicais", "Comparador", "Heatmap Temporal"]
+SOURCE_LONG = "Mulheres nos Festivais: quem ocupa os palcos brasileiros?"
 
 with st.sidebar:
-    # Seletor de Idioma Discreto
-    col_l1, col_l2, col_l3 = st.columns([1, 1, 1])
-    with col_l1:
-        if st.button("PT", type="primary" if st.session_state['lang'] == 'PT' else "secondary"): set_lang('PT'); st.rerun()
-    with col_l2:
-        if st.button("ES", type="primary" if st.session_state['lang'] == 'ES' else "secondary"): set_lang('ES'); st.rerun()
-    with col_l3:
-        if st.button("EN", type="primary" if st.session_state['lang'] == 'EN' else "secondary"): set_lang('EN'); st.rerun()
+    # 1. Cabeçalho e Títulos
+    st.markdown(f"<div class='sidebar-tag'>Painel de Dados</div><div class='sidebar-title'>Mulheres nos Festivais</div><div class='sidebar-subtitle'>Quem ocupa os palcos brasileiros?<br>2016 — 2026</div>", unsafe_allow_html=True)
     
-    st.markdown(f"<div class='sidebar-tag'>{t['sidebar_tag']}</div><div class='sidebar-title'>{t['sidebar_title']}</div><div class='sidebar-subtitle'>{t['sidebar_subtitle']}</div>", unsafe_allow_html=True)
-    
+    # 2. Menu de Navegação
     keys = ["page_about", "page_methodology", "page_history", "page_annual", "page_festival", "page_geo", "page_artists", "page_comparator", "page_heatmap"]
-    for k, lab in zip(keys, t['tabs']):
+    for k, lab in zip(keys, TABS):
         btn_type = "primary" if st.session_state['page'] == k else "secondary"
         if st.button(lab, use_container_width=True, type=btn_type): 
             st.session_state['page'] = k
             st.rerun()
             
-    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
 
+    # 3. Bloco de Métricas (Estilo Texto de Licença)
     total_festivais = df['Festival'].nunique()
     total_atos = len(df)
     total_integrantes = int(df[['Homens', 'Mulheres', 'Pessoas NB']].sum().sum())
+    
+    # Formatando o número de integrantes com ponto (ex: 12.345)
     integrantes_fmt = f"{total_integrantes:,}".replace(',', '.')
 
     st.markdown(f"""
-        <div style='font-size: 0.75rem; color: #666; line-height: 1.6;'>
-            <b>{t['database']}</b><br>
-            • {total_festivais} {t['festivals_analyzed']}<br>
-            • {total_atos} {t['acts_cataloged']}<br>
-            • {integrantes_fmt} {t['members_mapped']}<br>
-            • {t['last_update']} {data_planilha}
+        <div style='font-size: 0.8rem; color: #666; line-height: 1.6;'>
+            <b>Base de dados:</b><br>
+            • {total_festivais} festivais analisados<br>
+            • {total_atos} atos musicais catalogados<br>
+            • {integrantes_fmt} integrantes individuais mapeados<br>
+            • Última atualização: {data_planilha}
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<hr>", unsafe_allow_html=True)
-    st.markdown(f"<div style='font-size: 0.75rem; color: #666; line-height: 1.4;'>{t['license_text']}<br><br><b>{t['update_notice']}</b></div>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+
+    # 4. Texto de Licença e Aviso Final
+    st.markdown(f"""
+        <div style='font-size: 0.8rem; color: #666; line-height: 1.4;'>
+            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
+            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
+            <br><br>
+            <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
+        </div>
+    """, unsafe_allow_html=True)
     
-    # Botão Buy Me a Coffee Nativo e Elegante
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.link_button(
-        "☕ Buy Me a Coffee", 
-        "https://www.buymeacoffee.com/mulheresnosfestivais", 
-        use_container_width=True
-    )
+    st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
+    
+    # Código para renderizar o botão oficial do Buy Me a Coffee
+    button_html = """
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+            data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
+            data-emoji="☕" data-font="Cookie" data-text="Buy Me a Coffee" data-outline-color="#ffffff" 
+            data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
+    """
     
     # Centraliza o botão na sidebar
     components.html(f"<div style='display: flex; justify-content: center;'>{button_html}</div>", height=70)
