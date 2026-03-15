@@ -8,7 +8,7 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
-st.markdown("""
+st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -52,25 +52,6 @@ st.markdown("""
             color: white !important;
             border: 1px solid #1a1a1a !important;
         }}
-
-        /* 1. Estiliza a caixa do Selectbox (o campo fechado) */
-        div[data-baseweb="select"] > div {
-            border-radius: 12px !important;
-            border: 1px solid #f0f0f0 !important;
-            background-color: white !important;
-        }
-
-        /* 2. Estiliza a lista suspensa que abre */
-        ul[data-baseweb="menu"] {
-            border-radius: 12px !important;
-            border: 1px solid #f0f0f0 !important;
-        }
-
-        /* 3. Estiliza cada item dentro da lista */
-        li[data-baseweb="option"] {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 14px !important;
-        }
 
         /* Sidebar */
         [data-testid="stSidebar"] {{
@@ -167,7 +148,7 @@ st.markdown("""
             margin: 1.5rem 0 !important;
             opacity: 0.1;
         }}
-
+        
         footer {{visibility: hidden;}}
     </style>
 """, unsafe_allow_html=True)
@@ -259,7 +240,7 @@ with st.sidebar:
     total_atos = len(df)
     total_integrantes = int(df[['Homens', 'Mulheres', 'Pessoas NB']].sum().sum())
     
-    # Número de integrantes com ponto (ex: 12.345)
+    # Formatando o número de integrantes com ponto (ex: 12.345)
     integrantes_fmt = f"{total_integrantes:,}".replace(',', '.')
 
     st.markdown(f"""
@@ -277,8 +258,8 @@ with st.sidebar:
     # 4. Texto de Licença e Aviso Final
     st.markdown(f"""
         <div style='font-size: 0.8rem; color: #666; line-height: 1.4;'>
-            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria.  <br>
-            <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
+            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
+            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
             <br><br>
             <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
         </div>
@@ -286,7 +267,7 @@ with st.sidebar:
     
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     
-    # Botão oficial do Buy Me a Coffee
+    # Código para renderizar o botão oficial do Buy Me a Coffee
     button_html = """
     <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
             data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
@@ -772,7 +753,7 @@ elif page == "page_geo":
         fig.update_traces(marker=dict(line=dict(width=1, color='white')))
         fig.update_layout(height=350, xaxis_tickangle=-30, plot_bgcolor='white')
         fig.add_hline(y=50, line_dash="dot", line_color="#666", opacity=0.4)
-        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "bottom")
+        fig = add_source(fig, "Mulheres nos Festivais: quem ocupa os palcos brasileiros? Lima Arruda, 2026", "top")
         st.plotly_chart(fig, use_container_width=True)
     
     with ct:
