@@ -149,7 +149,29 @@ st.markdown(f"""
             opacity: 0.1;
         }}
 
-        
+        /* Estilizando os Seletores (Dropdowns) - Versão Garantida */
+div[data-baseweb="select"] > div:first-child {
+    border-radius: 16px !important; /* Arredondamento elegante */
+    border: 1px solid #e0e0e0 !important;
+    background-color: white !important;
+    padding: 2px 8px !important;
+    transition: all 0.2s ease !important;
+    min-height: 42px !important; /* Altura confortável para UX */
+}
+
+/* Efeito de Hover no Seletor */
+div[data-baseweb="select"]:hover > div:first-child {
+    border-color: #7B2CBF !important;
+    box-shadow: 0 4px 12px rgba(123, 44, 191, 0.08) !important;
+}
+
+/* Ajuste do texto dentro do seletor para não bater na borda curva */
+div[data-testid="stSelectbox"] label {
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    margin-bottom: 8px !important;
+}
+
 
         
         footer {{visibility: hidden;}}
