@@ -9,47 +9,153 @@ import numpy as np
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
 # Verifique se começou com st.markdown("""
-st.markdown("""
-<style>
-    /* 1. IMPORTAR FONTE MODERNA */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+st.markdown(f"""
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        html, body, [class*="css"] {{
+            font-family: 'Inter', sans-serif;
+        }}
 
-    /* 2. ESTILIZAR OS BOTÕES DA SIDEBAR */
-    .stButton > button {
-        width: 100%;
-        border-radius: 12px !important;
-        border: 1px solid #f0f0f0 !important;
-        background-color: white !important;
-        color: #555 !important;
-        padding: 10px 20px !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        text-align: left !important;
-        transition: all 0.2s ease-in-out !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
-        margin-bottom: -5px !important;
-    }
+        .block-container {{
+            padding-top: 3.5rem !important;  
+            padding-bottom: 2rem;
+            max-width: 1200px;
+        }}
+        
+        /* Botões Arredondados e Elegantes (Estilo Impact) */
+        div.stButton > button {{
+            border-radius: 50px !important;
+            border: 1px solid #e0e0e0 !important;
+            background-color: white !important;
+            color: #1a1a1a !important;
+            padding: 0.4rem 1.2rem !important;
+            font-size: 0.9rem !important;
+            font-weight: 500 !important;
+            transition: all 0.2s ease !important;
+            text-transform: none !important;
+            width: 100%;
+        }}
+        
+        div.stButton > button:hover {{
+            border-color: #7B2CBF !important;
+            color: #7B2CBF !important;
+            background-color: #fcfaff !important;
+        }}
+        
+        div.stButton > button[kind="primary"] {{
+            background-color: #1a1a1a !important;
+            color: white !important;
+            border: 1px solid #1a1a1a !important;
+        }}
 
-    /* Efeito de Hover */
-    .stButton > button:hover {
-        border-color: #7B2CBF !important;
-        color: #7B2CBF !important;
-        background-color: #f9f5ff !important;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(123, 44, 191, 0.1) !important;
-    }
+        /* Seletor de Idioma Discreto */
+        .lang-btn-container {{
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            justify-content: flex-start;
+        }}
+        
+        /* Sidebar */
+        [data-testid="stSidebar"] {{
+            background-color: #fcfcfc;
+            border-right: 1px solid #eee;
+        }}
+        
+        .sidebar-tag {{
+            font-size: 0.65rem; 
+            font-weight: 600; 
+            color: #7B2CBF; 
+            text-transform: uppercase; 
+            letter-spacing: 1.2px;
+            margin-bottom: 0.3rem;
+        }}
+        
+        .sidebar-title {{
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #1a1a1a; 
+            line-height: 1.1; 
+            margin-bottom: 0.4rem;
+        }}
+        
+        .sidebar-subtitle {{
+            font-size: 0.8rem; 
+            color: #666; 
+            line-height: 1.4; 
+            margin-bottom: 1.5rem;
+        }}
 
-    /* Botão da Página Ativa */
-    .stButton > button[kind="primary"] {
-        background-color: #7B2CBF !important;
-        color: white !important;
-        border: none !important;
-        box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3) !important;
-    }
-</style>
-""", unsafe_allow_html=True) # <-- Verifique se fechou as aspas e o parênteses aqui
+        /* Títulos de Seção */
+        .section-title {{
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.5px;
+        }}
+        
+        .section-subtitle {{
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }}
 
+        .body-text {{
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }}
+
+        /* Cartões de Métrica */
+        .custom-metric-box {{
+            background-color: white;
+            border: 1px solid #eee;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }}
+
+        .metric-title {{
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }}
+
+        .metric-value {{
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }}
+
+        .metric-footer {{
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.4rem;
+        }}
+
+        /* Legend Box */
+        .exclusion-legend {{
+            background-color: #f9f9f9;
+            padding: 1.2rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.5;
+            border: 1px solid #eee;
+        }}
+
+        hr {{
+            margin: 1.5rem 0 !important;
+            opacity: 0.1;
+        }}
+        
+        footer {{visibility: hidden;}}
+    </style>
+""", unsafe_allow_html=True)
 # --- LEI DE CORES PADRONIZADA ---
 CORES_GEN = {
     'Homens': '#0077B6',      # Azul Vibrante
