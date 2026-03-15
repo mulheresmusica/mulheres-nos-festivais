@@ -8,15 +8,13 @@ import numpy as np
 
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
+# Verifique se começou com st.markdown("""
 st.markdown("""
-    st.markdown("""
 <style>
     /* 1. IMPORTAR FONTE MODERNA */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-    /* 2. ESTILIZAR OS BOTÕES DA SIDEBAR (FORÇADO) */
-    div[data-testid="stSidebarNav"] {display: none;} /* Remove o nav padrão se houver */
-
+    /* 2. ESTILIZAR OS BOTÕES DA SIDEBAR */
     .stButton > button {
         width: 100%;
         border-radius: 12px !important;
@@ -33,7 +31,7 @@ st.markdown("""
         margin-bottom: -5px !important;
     }
 
-    /* Efeito de Hover (Passar o mouse) */
+    /* Efeito de Hover */
     .stButton > button:hover {
         border-color: #7B2CBF !important;
         color: #7B2CBF !important;
@@ -42,27 +40,15 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(123, 44, 191, 0.1) !important;
     }
 
-    /* Botão da Página Ativa (Tipo Primary) */
+    /* Botão da Página Ativa */
     .stButton > button[kind="primary"] {
         background-color: #7B2CBF !important;
         color: white !important;
         border: none !important;
         box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3) !important;
     }
-    
-    .stButton > button[kind="primary"]:hover {
-        color: white !important;
-        background-color: #6a24a3 !important;
-    }
-
-    /* Ajuste de Títulos na Sidebar */
-    .sidebar-title {
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 700 !important;
-        color: #3D2B56 !important;
-    }
 </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True) # <-- Verifique se fechou as aspas e o parênteses aqui
 
 # --- LEI DE CORES PADRONIZADA ---
 CORES_GEN = {
