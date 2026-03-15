@@ -149,18 +149,7 @@ st.markdown(f"""
             opacity: 0.1;
         }}
 
-        div[data-baseweb="select"] > div {
-        border-radius: 16px !important; /* Arredondamento elegante, mas funcional */
-        border: 1px solid #e0e0e0 !important;
-        background-color: white !important;
-        padding: 2px 8px !important;
-        transition: all 0.2s ease !important;
-        }
-
-        div[data-baseweb="select"]:hover > div {
-        border-color: #7B2CBF !important;
-        box-shadow: 0 2px 8px rgba(123, 44, 191, 0.05) !important;
-        }
+        
 
         
         footer {{visibility: hidden;}}
