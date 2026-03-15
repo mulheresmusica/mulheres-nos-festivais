@@ -53,6 +53,25 @@ st.markdown(f"""
             border: 1px solid #1a1a1a !important;
         }}
 
+        /* 1. Estiliza a caixa do Selectbox (o campo fechado) */
+        div[data-baseweb="select"] > div {
+            border-radius: 12px !important;
+            border: 1px solid #f0f0f0 !important;
+            background-color: white !important;
+        }
+
+        /* 2. Estiliza a lista suspensa que abre */
+        ul[data-baseweb="menu"] {
+            border-radius: 12px !important;
+            border: 1px solid #f0f0f0 !important;
+        }
+
+        /* 3. Estiliza cada item dentro da lista */
+        li[data-baseweb="option"] {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px !important;
+        }
+
         /* Sidebar */
         [data-testid="stSidebar"] {{
             background-color: #fcfcfc;
