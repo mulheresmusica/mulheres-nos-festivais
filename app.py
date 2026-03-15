@@ -150,6 +150,26 @@ st.markdown(f"""
         }}
         
         footer {{visibility: hidden;}}
+        /* Estilização do Selectbox */
+        div[data-baseweb="select"] > div {{
+            border-radius: 12px !important;
+            border: 1px solid #e0e0e0 !important;
+            font-family: 'Inter', sans-serif !important;
+        }}
+
+        /* Efeito de foco na borda */
+        div[data-baseweb="select"] > div:focus-within {{
+            border-color: #7B2CBF !important;
+            box-shadow: 0 0 0 1px #7B2CBF !important;
+        }}
+
+        /* Ajuste da lista suspensa (menu que abre) */
+        ul[data-baseweb="menu"] {{
+            border-radius: 12px !important;
+            font-family: 'Inter', sans-serif !important;
+        }}
+
+        
     </style>
 """, unsafe_allow_html=True)
 
