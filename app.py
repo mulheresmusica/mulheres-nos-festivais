@@ -258,7 +258,7 @@ with st.sidebar:
     # 4. Texto de Licença e Aviso Final
     st.markdown(f"""
         <div style='font-size: 0.8rem; color: #666; line-height: 1.4;'>
-            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
+            A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria.  
             <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
             <br><br>
             <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
