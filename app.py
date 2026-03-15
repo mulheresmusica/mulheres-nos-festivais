@@ -262,7 +262,7 @@ with st.sidebar:
     st.markdown(f"""
         <div style='font-size: 0.8rem; color: #666; line-height: 1.4;'>
             A democratização destes dados é fundamental. Compartilhe e redistribua citando fonte e autoria. 
-            — <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
+            <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt' style='color: #7B2CBF; text-decoration: none;'><b>CC BY-NC-SA 4.0</b></a>
             <br><br>
             <b>Este painel está em constante atualização para a inserção de novos festivais e artistas.</b>
         </div>
@@ -271,12 +271,12 @@ with st.sidebar:
     st.markdown("<hr style='margin: 15px 0; opacity: 0.3;'>", unsafe_allow_html=True)
     
     # Código para renderizar o botão oficial do Buy Me a Coffee
-    button_html = """
-    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
-            data-name="bmc-button" data-slug="mulheresnosfestivais" data-color="#3D2B56" 
-            data-emoji="☕" data-font="Cookie" data-text="Buy Me a Coffee" data-outline-color="#ffffff" 
-            data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
-    """
+        st.markdown("<br>", unsafe_allow_html=True)
+    st.link_button(
+        "☕ Buy Me a Coffee", 
+        "https://www.buymeacoffee.com/mulheresnosfestivais", 
+        use_container_width=True
+    )
     
     # Centraliza o botão na sidebar
     components.html(f"<div style='display: flex; justify-content: center;'>{button_html}</div>", height=70)
