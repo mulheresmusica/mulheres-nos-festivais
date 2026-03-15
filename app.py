@@ -10,51 +10,59 @@ st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_i
 
 st.markdown("""
     <style>
-        .block-container {
-            padding-top: 6.5rem !important;  
-            padding-bottom: 2rem;
-        }
-        
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 0 !important;  
-            margin-bottom: 0.2rem;
-            border-bottom: 2px solid #444;
-            padding-bottom: 0.4rem;
-            display: inline-block;
-        }
-        
-        header[data-testid="stHeader"] {
-            height: 2rem;  
-            background: transparent;
-        }
-        
-        /* Resto do CSS permanece igual... */
-        
-        footer {visibility: hidden;}
-        
-        [data-testid="stSidebar"] > div:first-child {padding-top: 1.5rem;}
-        
-        .sidebar-tag {font-size: 0.7rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 1.5px;}
-        .sidebar-title {
-            font-size: 1.6rem; 
-            font-weight: 700; 
-            color: #1a1a1a; 
-            line-height: 1.2; 
-            margin-top: 6px;
-            margin-bottom: 4px;
-        }
-        .sidebar-subtitle {font-size: 0.95rem; color: #555; line-height: 1.4; margin-bottom: 20px;}
-        
-        .section-subtitle {font-size: 0.9rem; color: #666; margin-bottom: 1.2rem; margin-top: 0.3rem;}
-        .body-text {font-size: 0.95rem; line-height: 1.7; color: #333;}
-        .body-text p {margin-bottom: 0.9rem;}
-        .pp-tooltip {border-bottom: 1px dashed #666; cursor: help;}
-        .info-box {background-color: #f8f9fa; border-left: 4px solid #666; padding: 1rem; margin: 1rem 0; border-radius: 4px;}
-        .trans-box {background-color: #f3e5f5; border-left: 4px solid #9c27b0; padding: 1rem; margin: 1rem 0; border-radius: 4px;}
-    </style>
+    /* 1. Botões da Sidebar (Efeito Impact) */
+    div[data-testid="stSidebar"] button {
+        border-radius: 12px !important;
+        border: 1px solid rgba(123, 44, 191, 0.1) !important;
+        transition: all 0.3s ease !important;
+        background-color: transparent !important;
+        color: #555 !important;
+        text-align: left !important;
+        padding: 10px 15px !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Efeito de Hover (passar o mouse) */
+    div[data-testid="stSidebar"] button:hover {
+        background-color: rgba(123, 44, 191, 0.05) !important;
+        border-color: #7B2CBF !important;
+        color: #7B2CBF !important;
+        transform: translateX(3px); /* Leve deslocamento lateral */
+    }
+
+    /* Botão da página ativa */
+    div[data-testid="stSidebar"] button[kind="primary"] {
+        background-color: #7B2CBF !important;
+        color: white !important;
+        box-shadow: 0 4px 12px rgba(123, 44, 191, 0.2) !important;
+    }
+
+    /* 2. Suavização Geral do Painel */
+    .stApp {
+        background-color: #FFFFFF;
+    }
+
+    /* Títulos mais modernos */
+    .section-title {
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.5px;
+        border-bottom: none !important;
+        font-size: 1.8rem !important;
+    }
+
+    /* Cards do Panorama Anual mais elegantes */
+    .custom-metric-box {
+        background: #FFFFFF !important;
+        border: 1px solid #F0F0F0 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
+        transition: transform 0.2s ease;
+    }
+    
+    .custom-metric-box:hover {
+        transform: translateY(-5px);
+    }
+</style>
 """, unsafe_allow_html=True)
 
 # --- LEI DE CORES PADRONIZADA ---
