@@ -9,58 +9,57 @@ import numpy as np
 st.set_page_config(page_title="Mulheres nos Festivais | Painel de Dados", page_icon="🟣", layout="wide")
 
 st.markdown("""
-    <style>
-    /* 1. Botões da Sidebar (Efeito Impact) */
-    div[data-testid="stSidebar"] button {
+    st.markdown("""
+<style>
+    /* 1. IMPORTAR FONTE MODERNA */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    /* 2. ESTILIZAR OS BOTÕES DA SIDEBAR (FORÇADO) */
+    div[data-testid="stSidebarNav"] {display: none;} /* Remove o nav padrão se houver */
+
+    .stButton > button {
+        width: 100%;
         border-radius: 12px !important;
-        border: 1px solid rgba(123, 44, 191, 0.1) !important;
-        transition: all 0.3s ease !important;
-        background-color: transparent !important;
+        border: 1px solid #f0f0f0 !important;
+        background-color: white !important;
         color: #555 !important;
-        text-align: left !important;
-        padding: 10px 15px !important;
+        padding: 10px 20px !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px !important;
         font-weight: 500 !important;
+        text-align: left !important;
+        transition: all 0.2s ease-in-out !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+        margin-bottom: -5px !important;
     }
-    
-    /* Efeito de Hover (passar o mouse) */
-    div[data-testid="stSidebar"] button:hover {
-        background-color: rgba(123, 44, 191, 0.05) !important;
+
+    /* Efeito de Hover (Passar o mouse) */
+    .stButton > button:hover {
         border-color: #7B2CBF !important;
         color: #7B2CBF !important;
-        transform: translateX(3px); /* Leve deslocamento lateral */
+        background-color: #f9f5ff !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(123, 44, 191, 0.1) !important;
     }
 
-    /* Botão da página ativa */
-    div[data-testid="stSidebar"] button[kind="primary"] {
+    /* Botão da Página Ativa (Tipo Primary) */
+    .stButton > button[kind="primary"] {
         background-color: #7B2CBF !important;
         color: white !important;
-        box-shadow: 0 4px 12px rgba(123, 44, 191, 0.2) !important;
-    }
-
-    /* 2. Suavização Geral do Painel */
-    .stApp {
-        background-color: #FFFFFF;
-    }
-
-    /* Títulos mais modernos */
-    .section-title {
-        font-family: 'Inter', sans-serif;
-        letter-spacing: -0.5px;
-        border-bottom: none !important;
-        font-size: 1.8rem !important;
-    }
-
-    /* Cards do Panorama Anual mais elegantes */
-    .custom-metric-box {
-        background: #FFFFFF !important;
-        border: 1px solid #F0F0F0 !important;
-        border-radius: 16px !important;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important;
-        transition: transform 0.2s ease;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(123, 44, 191, 0.3) !important;
     }
     
-    .custom-metric-box:hover {
-        transform: translateY(-5px);
+    .stButton > button[kind="primary"]:hover {
+        color: white !important;
+        background-color: #6a24a3 !important;
+    }
+
+    /* Ajuste de Títulos na Sidebar */
+    .sidebar-title {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700 !important;
+        color: #3D2B56 !important;
     }
 </style>
 """, unsafe_allow_html=True)
