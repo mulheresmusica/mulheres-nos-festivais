@@ -150,12 +150,12 @@ st.markdown(f"""
         }}
 
         div[data-baseweb="select"] > div:first-child {
-        border-radius: 16px !important; /* Arredondamento elegante */
+        border-radius: 16px !important; 
         border: 1px solid #e0e0e0 !important;
         background-color: white !important;
         padding: 2px 8px !important;
         transition: all 0.2s ease !important;
-        min-height: 42px !important; /* Altura confortável para UX */
+        min-height: 42px !important; 
         }
 
         div[data-baseweb="select"]:hover > div:first-child {
