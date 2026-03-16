@@ -69,7 +69,7 @@ st.markdown(f"""
         }}
         
         .sidebar-title {{
-            font-size: 1.4rem; 
+            font-size: 1.7rem; 
             font-weight: 700; 
             color: #1a1a1a; 
             line-height: 1.1; 
