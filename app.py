@@ -77,7 +77,7 @@ st.markdown(f"""
         }}
         
         .sidebar-subtitle {{
-            font-size: 0.8rem; 
+            font-size: 1rem; 
             color: #666; 
             line-height: 1.4; 
             margin-bottom: 1.5rem;
