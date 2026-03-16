@@ -60,7 +60,7 @@ st.markdown(f"""
         }}
         
         .sidebar-tag {{
-            font-size: 0.65rem; 
+            font-size: 0.85rem; 
             font-weight: 600; 
             color: #7B2CBF; 
             text-transform: uppercase; 
